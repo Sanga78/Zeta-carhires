@@ -1,0 +1,101 @@
+{%load static%}
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="{% static 'images/Logo.jpg' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Zeta CarHires</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ user.username }}</a>
+        </div>
+      </div>
+      
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          
+          <li class="nav-item">
+            {% url 'add_vehicle' as add_vehicle %}
+            <a href="{{ 'add_vehicle' }}" class="nav-link {% if request.path == add_vehicle %} active {% endif %}">
+              <i class="nav-icon fas fa-car"></i>
+              <p>
+                Add Car
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'manage_vehicle' as manage_vehicle %}
+            {% url 'edit_vehicle' vehicle_id=id as edit_vehicle %}
+            <a href="{{ 'manage_vehicle' }}" class="nav-link {% if request.path == manage_vehicle %} active {% endif %}{% if request.path == edit_vehicle %} active {% endif %}">
+              <i class="nav-icon fas fa-car"></i>
+              <p>
+                Manage Cars
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'add_customer' as add_customer %}
+            <a href="{{ 'add_customer' }}" class="nav-link {% if request.path == add_customer %} active {% endif %}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Add Customer
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'manage_customer' as manage_customer %}
+            {% url 'edit_customer' customer_id=id as edit_customer %}
+            <a href="{{ 'manage_customer' }}" class="nav-link {% if request.path == manage_customer %} active {% endif %}{% if request.path == edit_customer %} active {% endif %}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Manage Customers
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+                Messages
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                {% url 'earn_responses' as earn_responses %}
+                <a href="{{ 'earn_responses' }}" class="nav-link {% if request.path == earn_responses %} active {% endif %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Inbox</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                {% url 'hire_requests' as hire_requests %}
+                <a href="{{ 'hire_requests' }}" class="nav-link {% if request.path == hire_requests %} active {% endif %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Hire Requests</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                {% url 'tour_requests' as tour_requests %}
+                <a href="{{ 'tour_requests' }}" class="nav-link {% if request.path == tour_requests %} active {% endif %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tour Requests</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block main_content %}
+{% load static %}
+<body class="earn">
+<!-- End Header -->
+    <section class="home">
+        <div class="description">
+            <h2>Become a car sharing entrepreneur</h2>
+        </div>
+    </section>
+    <section class="fixed delay-neg-500">
+        <div class="whatsap">
+            <a href="" class="bi bi-whatsapp" aria-hidden="true">&nbsp;&nbsp;Chat with Us</a>
+        </div>
+    </section>
+    <section class="hero flex-column justify-content-center align-items-center">
+       <div class="container">
+        <div class="row justify-content-center">
+            <h2>Why share your car?</h2>
+            <div class="col-lg-4">
+                <h1>Earn</h1>
+                <p>You offer your car for rental/Hire to your neighbor and EARN handsomely. After getting set up on Ride, most car owners earn enough to cover the costs of owning their cars, including loan monthly payments,fuel,and maintenance.</p>
+            </div>
+            <div class="col-lg-4">
+                <h1>Freedom</h1>
+                <p>We understand that you need to enjoy the convenience of owning a car, Thus you retain the car and only rent it out when not using it.</p>
+            </div>
+            <div class="col-lg-4">
+                <h1>Peace of mind</h1>
+                <p>We only allow well screened renters on our platform. We assure you we have done due diligence.Before you approve a rental request, you have a view of the profile of the renter to get comfort.We have your back incase of any dispute.</p>
+            </div>
+        </div>
+       </div>
+    </section>
+    <section class="inquire">
+
+    </section>
+   
+    <section class="connect flex-column justify-content-center align-items-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="content">
+                    <div><h1>Zeta<span> peace of mind</span></h1></div>
+                    <div>be independent</div>
+                    <div>your car is your ca(r)pital</div>
+                    <div>link</div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h3>Contact us anytime</h3>
+                <p>Have a question? We're here to help. Send us a message and we'll get be in touch.</p>
+                <form action="/response" method="post">
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                    <label for="full_name">Name<input type="text" id="full_name" name="full_name" value="{{ user.first_name }} {{ user.last_name }}"></label>
+                    <label for="email">Email<input type="email" id="email" name="email" value="{{ user.email }}"></label>
+                    {% else %}
+                    <label for="full_name">Name<input type="text" id="full_name" name="full_name"></label>
+                    <label for="email">Email<input type="email" id="email" name="email"></label>
+                    {% endif %}
+                    <label for="phone_number">Phone Number<input type="tel" id="phone_number" name="phone_number"></label>
+                    <label for="message">Message:
+                        <textarea id="bio" name="message" rows="3" cols="30" placeholder="How do you operate..."></textarea>
+                    </label>
+                    <button type="submit">send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="testimonial">
+        <h2>testimonials</h2>
+        <div class="box-container">
+            <div class="box">
+                <img src="{% static 'media/images/pic-1.png' %}" class="user" alt=" ">
+                <div class="marks"><i class="bi bi-quote" aria-hidden="true "></i></div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, commodi veritatis quaerat consequuntur adipisci molestias enim sapiente magni. Et nulla vero quas blanditiis repellendus earum nihil temporibus accusamus eius alias!</p>
+                <h3>john deo</h3>
+            </div>
+            <div class="box">
+                <img src="{% static 'media/images/pic-2.png' %}" class="user" alt=" ">
+                <div class="marks"><i class="bi bi-quote" aria-hidden="true "></i></div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, commodi veritatis quaerat consequuntur adipisci molestias enim sapiente magni. Et nulla vero quas blanditiis repellendus earum nihil temporibus accusamus eius alias!</p>
+                <h3>john deo</h3>
+            </div>
+            <div class="box">
+                <img src="{% static 'media/images/pic-3.png' %}" class="user" alt=" ">
+                <div class="marks"><i class="bi bi-quote" aria-hidden="true "></i></div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, commodi veritatis quaerat consequuntur adipisci molestias enim sapiente magni. Et nulla vero quas blanditiis repellendus earum nihil temporibus accusamus eius alias!</p>
+                <h3>john deo</h3>
+            </div>
+            <div class="box">
+                <img src="{% static 'media/images/pic-1.png' %}" class="user" alt=" ">
+                <div class="marks"><i class="bi bi-quote" aria-hidden="true "></i></div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, commodi veritatis quaerat consequuntur adipisci molestias enim sapiente magni. Et nulla vero quas blanditiis repellendus earum nihil temporibus accusamus eius alias!</p>
+                <h3>john deo</h3>
+            </div>
+        </div>
+    </section>
+    
+{% endblock main_content%}

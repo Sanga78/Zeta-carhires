@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block main_content %}
+{% load static %}
+<body class="buy">
+     <!-- home section starts here -->
+    <section class="home" id="home">
+        <div class="content">
+            <div class="carousel">
+                <img src="{% static 'images/car-1.jpg' %}" class="carousel-image">
+                <img src="{% static 'images/car-2.jpg' %}" class="carousel-image hidden">
+                <img src="{% static 'images/car-3.jpg' %}" class="carousel-image hidden">
+                <div class="centered-text">Get a car from us</div>
+            </div>
+        </div>
+    </section>
+    <!-- home section ends here -->
+    <section class="fixed delay-neg-500">
+        <div class="whatsap">
+            <a href="" class="bi bi-whatsapp" aria-hidden="true">&nbsp;&nbsp;Chat with Us</a>
+        </div>
+    </section>
+    <!-- menu section starts here -->
+    <section class="cars-for-sale" id="sell">
+        <h2>Cars for Sale</h2>
+        <div class="car-list">
+            <!-- Cars will be dynamically added by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Modal for displaying car details -->
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Car Description</h2>
+            <p>Color: <span id="carColor"></span></p>
+            <p>Seats: <span id="carSeats"></span></p>
+            <div class="car-images">
+                <!-- Images will be dynamically added -->
+            </div>
+        </div>
+    </div>
+
+<script src="{% static 'js/new.js' %}"></script> 
+{% endblock main_content%}

@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" crossorigin="anonymous" />
+</head>
+{% block main_content %}
+<head>
+    <!-- fontawesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" crossorigin="anonymous" />
+    <style>
+        #phoneNumber{
+            display: none; 
+            margin: auto;
+            padding: 1rem .8rem;
+            max-width: 13rem;
+            background-color: rgba(197, 195, 195, 0.606);
+            border: 1px solid rgba(128, 128, 128, 0.4);
+            border-radius: .5rem;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+        #phoneNumber .bi-telephone{
+            color: green;
+            padding: 0 10px 0 0;
+        }
+        #phoneNumberText{
+            padding: .3rem;
+            background-color: white;
+        }
+    </style>
+</head>
+<body class="hire">
+    <!-- header section starts here -->
+    <!-- header section ends here -->
+
+    <!-- home section starts here -->
+    <section class="home" id="home">
+        <div class="cont">
+            <div class="one"><h2>Hire your favorite car in minutes</h2></div>
+            <div class="two"><h3>"For every <span>7</span> cars hired in Nairobi,<span> 4 </span>are from us"</h3><p>Hire a car in minutes</p></div>
+        </div>
+    </section>
+    <!-- home section ends here -->
+
+    <!-- menu section starts here -->
+    <section class="menu" id="menu">
+
+        <h1 class="heading">our<span> cars </span></h1>
+
+        <div class="box-container"> 
+            {% for car in cars %}          
+            <div class="box">
+                <img src="{{car.car_image.url}}" alt="{{car.car_name}}">
+                <h3>{{car.car_name}}</h3>
+                <div class="price">From ksh<span> {{car.price}}</span> per hour</div>
+                <div id="phoneNumber" class="phone-number">
+                    <a href="" class="bi bi-telephone" aria-hidden="true "></a>
+                    <span id="phoneNumberText">0714710947</span>
+                </div>
+                {% if car.is_available == True %} <button class="btn" onclick="openModal('{{car.color}}', '{{car.capacity}}', '{{car.description}}')">Hire now</button>
+                {% else %}
+                    <button class="btn" onclick="showPhoneNumber()">Hire now</button>
+                {% endif %}
+            </div>
+            {% endfor %} 
+            <div id="carModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Car Details</h2>
+                    <p><strong>Color:</strong> <span id="modalColor"></span></p>
+                    <p><strong>Seats:</strong> <span id="modalSeats"></span></p>
+                    <p><strong>Description:</strong> <span id="modalDescription"></span></p>
+                    <button class="btn">Hire</button>
+                </div>
+            </div>
+        </div>
+         <!-- Modal for displaying car details -->
+    </section>
+    <!-- menu section ends here -->
+
+    <!-- review section starts here -->
+    <section class="review" id="review">
+
+        <h1 class="heading"> client's <span>review</span></h1>
+
+        <div class="box-container">
+            <div class="box">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, commodi veritatis quaerat consequuntur adipisci molestias enim sapiente magni. Et nulla vero quas blanditiis repellendus earum nihil temporibus accusamus eius alias!</p>
+                <img src="{% static 'media/images/pic-1.png' %}" alt=" " class="user" alt=" ">
+                <h3>john deo</h3>
+                <div class="stars">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-half-alt" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="box">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, commodi veritatis quaerat consequuntur adipisci molestias enim sapiente magni. Et nulla vero quas blanditiis repellendus earum nihil temporibus accusamus eius alias!</p>
+                <img src="{% static 'media/images/pic-2.png' %}" alt=" " class="user" alt=" ">
+                <h3>john deo</h3>
+                <div class="stars">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-half-alt" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="box">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, commodi veritatis quaerat consequuntur adipisci molestias enim sapiente magni. Et nulla vero quas blanditiis repellendus earum nihil temporibus accusamus eius alias!</p>
+                <img src="{% static 'media/images/pic-3.png' %}" alt=" " class="user" alt=" ">
+                <h3>john deo</h3>
+                <div class="stars">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-half-alt " aria-hidden="true "></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- review section ends here -->
+
+    <section class="contacts" id="contacts">
+        <!-- <div class="change-container">
+            <div>
+                <span>HIRE YOUR FAVORITE CAR IN MINUTES</span>
+                <span>all cars available near you</span>
+                <span>VISIT</span>
+                <a href="">zetacarhires.com</a>
+            </div>
+            <div>
+                <span>Have you been dreaming of driving a car</span>
+                <span>Get yourself your dream car from us </span>
+            </div>
+        </div> -->
+        <div class="heading"><span>contact</span> us</div>
+        <div class="row">
+            <form method="post" action='/hire_request'>
+                {% csrf_token %}
+                <fieldset>
+                    {% if user.is_authenticated %}
+                    <label for="full-name">Full Name <input id="full-name" name="full-name" type="text" required value="{{ user.first_name }} {{ user.last_name }}"/></label>
+                    {% else %}
+                    <label for="full-name">Full Name <input id="full-name" name="full-name" type="text" required /></label>
+                    {% endif %}
+                  <label for="phone">Mobile Number <input id="phone" name="phone" type="tel" pattern="{10,}" required /></label>
+                  <label for="start-date">From when <input id="start-date" name="start-date" type="date" required /></label>
+                  <label for="end-date">To when <input id="end-date" name="end-date" type="date" required /></label>
+                  <label for="destination">Destination <input id="destination" name="destination" type="address" required /></label>
+                  <label for="car">Type of car
+                    <select name="car" id="car" >
+                        {% for car in cars %}
+                            <option value="{{ car.id }}">{{ car.car_name }}</option>
+                        {% endfor %}
+                    </select>
+                  </label>
+                </fieldset>
+                <input type="submit" value="Submit" />
+              </form>
+        </div>
+    </section>
+    <!-- review section ends here -->
+<script>
+    function showPhoneNumber() {
+    var phoneNumber = document.getElementById("phoneNumber");
+    phoneNumber.style.display = "block";
+
+    setTimeout(function() {
+        phoneNumber.style.display = "none";
+    },10000);
+    window.addEventListener('scroll',function(){
+        phoneNumber.style.display = "none";
+    },{once:true});
+}
+
+</script>
+    <!-- footer section starts here -->
+
+  {% endblock main_content%}

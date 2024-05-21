@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block main_content %}
+<body class="grow">
+    <section class="home">
+        <div class="description">
+            <h2>Expand your car hire business</h2>
+            <h3>List your fleet on <a href="">Zeta</a> and triple your bookings</h3>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-9">
+                <form action="" method="post" class="delay-neg-500">
+                    <h3 style="color: rgb(8, 94, 180);">Book a call with us</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, quam.</p>
+                    {% if user.is_authenticated %}
+                    <div class="form-group mt-3"><input type="text" class="form-control" id="personal_name" name="personal_name" placeholder="Personal Name" value="{{ user.first_name }} {{ user.last_name }}"></div>
+                    <div class="form-group mt-3"><input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ user.email }}"></div>
+                    {% else %}
+                    <div class="form-group mt-3"><input type="text" class="form-control" id="personal_name" name="personal_name" placeholder="Personal Name"></div>
+                    <div class="form-group mt-3"><input type="email" class="form-control" id="email" name="email" placeholder="Email"></div>
+                    {% endif %}
+                    <div class="form-group mt-3"><input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name"></div>
+                    <div class="form-group mt-3"><input type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone"></div>
+                    <div class="form-group mt-3"><input type="number" class="form-control" id="cars" name="cars" placeholder="Number of cars"></div>
+                    <div class="text-center"><button type="submit" class="btn">book</button></div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="hero flex-column justify-content-center align-items-center">
+       <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-2">
+                <div class="img">
+                    <a href="" class="bi bi-bookmark" aria-hidden="true "></a>
+                </div>
+                <div class="title">Save time</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="img">
+                    <a href="" class="bi bi-bookmark" aria-hidden="true "></a>
+                </div>
+                <div class="title">earn more</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="img">
+                    <a href="" class="bi bi-bookmark" aria-hidden="true "></a>
+                </div>
+                <div class="title">Grow faster</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="img">
+                    <a href="" class="bi bi-bookmark" aria-hidden="true "></a>
+                </div>
+                <div class="title">friendly support</div>
+            </div>
+        </div>
+       </div>
+    </section>
+    <section class="quote">
+        <div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad, eligendi magni ipsa, neque possimus mollitia et veritatis magnam, excepturi tempora accusantium. Expedita veritatis inventore excepturi, minus doloribus a quas eum?</p>
+            <div class="details">
+                <div class="image"><img src="../images/person_1.jpg" alt=""></div>
+                <h2>Noel Kipkoech</br>CEO zeta car hires</h2>
+            </div>
+        </div>
+    </section>
+  </body>  
+{% endblock main_content%}

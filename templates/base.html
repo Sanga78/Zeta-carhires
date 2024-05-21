@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>zeta carhires</title>
+</head>
+ <!-- header section starts here -->
+ <header id="header" class="header d-flex align-items-center fixed-top">
+	<div class="container-fluid d-flex align-items-center justify-content-between">
+	
+		<a href="#" class="logo d-flex align-items-center  me-auto me-lg-0">
+		<img src="{% static 'images/Logo.jpg' %}" alt="">
+		<h1>Zeta CarHires</h1>
+		</a>
+	
+		<nav id="navbar" class="navbar">
+		<ul>
+			<li>{% url 'index' as index %}<a href="{{ 'index' }}" class = "{% if request.path == index %} active {% endif %}">Home</a></li>
+			<li>{% url 'car' as car %}<a href="{{ 'car' }}" class="{% if request.path == car %} active {% endif %}">Hire a car</a></li>
+			<li>{% url 'tours' as tours %}<a href="{{ 'tours' }}" class="{% if request.path == tours %} active {% endif %}">Tours & Travel</a></li>
+			<li>{% url 'earn' as earn %}<a href="{{ 'earn' }}" class ="{% if request.path == earn %}active{% endif %}">Earn</a></li>
+			<li>{% url 'grow' as grow %}<a href="{{ 'grow' }}" class="{% if request.path == grow %}active{% endif %}">Grow</a></li>
+			<li>{% url 'buy' as buy %}<a href="{{ 'buy' }}" class=" {% if request.path == buy %}active{% endif %} ">Buy a car</a></li>
+			<li>{% url 'about' as about %}<a href="{{ 'about' }}" class="{% if request.path == about %}active{% endif %}">About Us</a></li>
+			<li>{% url 'policy' as policy %}<a href="{{ 'policy' }}" class="{% if request.path == policy %} active{% endif %}">Policy</a></li>
+			{% if user.is_authenticated %}
+			<li>{% url 'logout' as logout %}<a href="{{ 'logout' }}" class="{% if request.path == logout %} active{% endif %}" style="color:red">Logout</a></li>
+			{% else %}
+			<li>{% url 'loginpage' as loginpage %}<a href="{{ 'loginpage' }}" class="{% if request.path == loginpage %} active{% endif %}" style="color:blue">Login</a></li>
+			{% endif %}
+		</ul>
+		</nav><!-- .navbar -->
+		<i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+		<i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+	</div>
+	</header>
+	<!-- End Header -->	
+<body>
+	
+    {% if messages %}
+      {% for message in messages %}
+      {% if message.tags == 'error' %}
+      <div class="alert alert-danger"><script>
+        alert("{{ message }}");
+        </script></div>
+      {% endif %}
+      {% if message.tags == 'success' %}
+      <div class="alert alert-success"><script>
+        alert("{{ message }}");
+        </script></div>
+      {% endif %}
+      {% endfor %}
+    {% endif %}
+	{% block main_content %}{% endblock main_content %}
+<!-- footer section starts here -->
+
+<section class="footer ">
+	<div class="div1">
+		<div class="logo">
+			<img src=" {% static 'images/Logo.jpg' %}" alt="logo" style="border: none;">
+		</div>
+		<div class="links ">
+			<a href="#">Home</a>
+			<a href="templates/car.html">Hire a car</a>
+			<a href="templates/tours.html">Tours & Travel</a>
+			<a href="templates/earn.html">Earn</a>
+			<a href="templates/grow.html">Grow</a>
+			<a href="templates/buy.html">Buy a car</a>
+			<a href="" class = "{% if request.path == index %} active {% endif %}">About Us</a>
+			<a href="templates/policy.html">Privacy Policy</a>
+		</div>
+		<div class="cont">
+			<h3>Mobile Number</h3>
+			<h3>Location</h3>
+			<h3>customer service mail</h3>
+		</div>
+	</div>
+	<div class="share ">
+		<a href="" class="bi bi-facebook" aria-hidden="true "></a>
+		<a href="" class="bi bi-twitter" aria-hidden="true "></a>
+		<a href="" class="bi bi-instagram" aria-hidden="true "></a>
+		<a href="" class="bi bi-telephone" aria-hidden="true "></a>
+		<a href="" class="bi bi-whatsapp" aria-hidden="true "></a>
+    </div>
+</section>
+<!-- footer section ends here -->
+<div class="credit ">Zeta <span>carhires</span> | all rights reserved</div>
+</body>
+<script src="{% static "js/script.js" %}"></script>
+</html>

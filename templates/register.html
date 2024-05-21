@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+	<link rel="stylesheet" href="/static/styles/navbar.css">
+</head>
+
+<body>
+
+    <div class="form" id="form">
+        <div id="create-account" class="login_container">
+            <h1>Sign Up below</h1>
+            <form method="post" autocomplete="off">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <h2 class="error">{{message}}</h2>
+                    {% endfor %}
+                {% endif %}
+                <input id="adm_num" name="adm_num" type="text" placeholder="Admission number">
+                <input id="fname" name="fname" type="text" placeholder="First name">
+                <input id="sname" name="sname" type="text" placeholder="Second name">
+                <input id="img" name="img" type="image" placeholder="Your image">
+                <input id="password1" name="password1" type="password" placeholder="Password">
+                <input id="password2" name="password2" type="password" placeholder="Confirm Password">
+                <button id="Register_btn" type="submit">Sign Up</button>
+                <center><a id="return_btn" href="{% url 'login' %}">Already have an account</a></center>
+            </form>
+        </div>
+    </div>	
+    </div> 
+   
+</body>
+</html>

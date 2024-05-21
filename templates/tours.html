@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block main_content %}
+{% load static %}
+<body class="tours">
+    <section class="home">
+        <div class="content">
+            <h2>Memorable safari for you and your family</h2>
+            <a href="" class="btn">Talk to us</a>
+        </div>
+    </section>
+    <section class="fixed delay-neg-500">
+        <div class="whatsap">
+            <a href="" class="bi bi-whatsapp" aria-hidden="true">&nbsp;&nbsp;Chat with Us</a>
+        </div>
+    </section>
+    <section class="hero">
+        <div class="row">
+            <div class="col">
+                <div class="image">
+                    <img src="{% static 'images/landcruiser-green.jpg' %}" alt="img">
+                </div>
+                <div class="title">Family & individual safari tours</div>
+            </div>
+            <div class="col">
+                <div class="image">
+                    <img src="{% static 'images/image_5.jpg' %}" alt="img">
+                </div>
+                <div class="title">Corporate,Group & Event Tours</div>
+            </div>
+            <div class="col">
+                <div class="image">
+                    <img src="{% static 'images/kenya.jpg' %}" alt="img">
+                </div>
+                <div class="title">Bespoke Transport Solutions</div>
+            </div>
+        </div>
+    </section>
+    <section class="plan">
+        <div class="image">
+            <img src="{% static 'images/Julias-river-camp-game-drives-masaimara (1).jpg' %}" alt="img">
+        </div>
+        <div class="memory">
+            <h3>Create amazing memories</h3>
+            <p>Let's plan your trip to the national park for a game Drive-Trip from Nairobi</br>one of the experts will get back to you as soon as possible.</p>
+            <a href="" class="btn">lets start planning</a>
+        </div>
+    </section>
+    <section class="connect">
+        <h2>Lets connect<br> call us/Whatsapp us on <span>0715296479</span></h2>
+        <form action="/tour_request" method="post">
+            {% csrf_token %}
+            <h3>contact us anytime</h3>
+            {% if user.is_authenticated %}
+            <label for="full_name">Name<input type="text" id="full_name" name="full_name" value="{{ user.first_name }} {{ user.last_name }}"></label>
+            <label for="email">Email<input type="email" id="email" name="email" value="{{ user.email }}"></label>
+            {% else %}
+            <label for="full_name">Name<input type="text" id="full_name" name="full_name"></label>
+            <label for="email">Email<input type="email" id="email" name="email"></label>
+            {% endif %}
+            <label for="phone_number">Mobile Number: <input type="tel" id="phone_number" name="phone_number"></label>
+            <label for="reply">How we can help you: <textarea id="reply" name="reply" rows="3" cols="30" placeholder="I want to visit..."></textarea></label>
+            <button type="submit"class="btn">send</button>
+        </form>
+    </section>
+    <section class="video">
+        <video autoplay muted loop>
+            <source src="{% static 'media/video/wilderbeast.mp4' %}" type="video/mp4">
+        </video>
+    </section>
+    
+{% endblock main_content %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block main_content %}
+{% load static %}
+<body class="index">
+	<section class="home">
+		<div class="description">
+			<h2>Welcome to Zeta Carhires<br>
+				<span class="change-container">
+					<span class="changing">Hire your favorite car</span>
+					<span class="changing">Earn with Us</span>
+					<span class="changing">Buy you dream car</span>
+				</span>
+			</h2>
+		</div>
+	</section>
+	<section class="fixed delay-neg-500">
+		<div class="whatsap">
+			<a href="" class="bi bi-whatsapp" aria-hidden="true">&nbsp;&nbsp;Chat with Us</a>
+		</div>
+	</section>
+	<section>
+		<div class="offer">
+			<div>
+				<h2>Buy a car</h2>
+				<p>Get yourself a dream car at an affordable price</p>
+				<a href="{{ 'buy' }}" class="btn">Buy Now</a>
+			</div>
+			<div>
+				<h2>Hire a car</h2>
+				<p>Rent you favorite car from us</p>
+				<a href="{{ 'car' }}" class="btn">Hire Now</a>
+			</div>
+			<div>
+				<h2>Grow with Us</h2>
+				<p>Earn by renting a car to us</p>
+				<a href="{{ 'grow' }}" class="btn">View more</a>
+			</div>
+		</div>
+	</section>
+	<section class="test">
+		<h1>Testimonials</h1>
+		<div class="testify">
+			<ul class='slider'>
+			<li class='item'>
+				<div class='testimonial'>
+				<p>"This is the best car-rental platform I've ever seen"</p>
+				<p>Aldrine Kiprotich</p>
+				<p>Kiongozi, Chuka</p>
+				</div>
+				<img class='image' src="{% static 'images/person_1.jpg' %}" loading="lazy">
+			</li>
+			<li class='item'>
+				<div class='testimonial'>
+				<p>"The perfect place to buy a car"</p>
+				<p>Millicent Ngetich</p>
+				<p>Nurse, Eldoret</p>
+				</div>
+				<img class='image' src="{% static 'images/person_2.jpg' %}" loading="lazy">
+			</li>
+			<li class='item'>
+				<div class='testimonial'>
+				<p>"Flexible prices for renting cars"</p>
+				<p>Kelly sanga</p>
+				<p>Proffesional, Eldoret</p>
+				</div>
+				<img class='image' src="{% static 'images/person_3.jpg' %}" loading="lazy">
+			</li>
+			</ul>
+			<nav>
+			<button class='slider-btn' data-index='0'></button>
+			<button class='slider-btn' data-index='1'></button>
+			<button class='slider-btn' data-index='2'></button>
+			</nav>
+		</div>
+	</section>
+{% endblock main_content %}

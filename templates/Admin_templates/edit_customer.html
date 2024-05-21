@@ -1,0 +1,31 @@
+{% extends 'Admin_templates/base.html' %}
+{% block page_title %}
+Edit Customer| username : {{ username }} | #ID : {{ id }}
+{% endblock page_title %}
+{% load static %}
+{% block main_content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Edit Customer</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                    {% url 'edit_customer_save' as action_path %}
+                    {% include 'Admin_templates/form_template.html' with messages=messages form=form action_path=action_path button_text="Edit Customer" %}
+                    </div>
+                    <!-- /.card-body -->
+                  </form>
+                </div>
+                <!-- /.card -->         
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+  {% endblock main_content %}
