@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import login,logout
-from my_app.EmailBackEnd import EmailBackEnd
+from car_rental.EmailBackEnd import EmailBackEnd
 from django.contrib import  messages
 from .models import Vehicle
 # Create your views here.
