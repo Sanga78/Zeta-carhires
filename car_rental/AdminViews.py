@@ -185,8 +185,12 @@ def return_car(request, booking_id):
     booking.car.is_available = True
     booking.car.save()
     booking.save()
-    return HttpResponseRedirect(reverse("manage_vehicle"))
+    return HttpResponseRedirect(reverse("bookings"))
 
 def new_fleet(request):
     fleets = Fleet.objects.all()
-    return render(request,"Admin_templates/tour_requests.html",{"fleets":fleets})
+    return render(request,"Admin_templates/fleet.html",{"fleets":fleets})
+
+def bookings(request):
+    bookings = Booking.objects.all()
+    return render(request,"Admin_templates/bookings.html",{"bookings":bookings})
