@@ -157,13 +157,9 @@ document.addEventListener('keydown', handleKeyNavigation);
 
 function openModal(color, seats, description) {
   var modal = document.getElementById("carModal");
-  var modalColor = document.getElementById("modalColor");
-  var modalSeats = document.getElementById("modalSeats");
-  var modalDescription = document.getElementById("modalDescription");
+  var number = document.getElementById("number");
 
-  modalColor.textContent = color;
-  modalSeats.textContent = seats;
-  modalDescription.textContent = description;
+  number.textContent = +254714710947;
   modal.style.display = "block";
 }
 
@@ -175,4 +171,15 @@ window.onclick = function(event) {
   if (event.target == document.getElementById('carModal')) {
       closeModal();
   }
+}
+function showPhoneNumber() {
+  var phoneNumber = document.getElementById("phoneNumber");
+  phoneNumber.style.display = "block";
+
+  setTimeout(function() {
+      phoneNumber.style.display = "none";
+  },10000);
+  window.addEventListener('scroll',function(){
+      phoneNumber.style.display = "none";
+  },{once:true});
 }

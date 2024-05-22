@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 # Create your models here.
 
 class CustomUser(AbstractUser):
@@ -53,39 +54,48 @@ class Responses(models.Model):
     def __str__(self):
         return str(self.email)   
 
-class Order(models.Model):
-    customer = models.ForeignKey(Customer,on_delete= models.SET_NULL,null=True, blank=True)
-    date_ordered = models.DateTimeField(auto_now_add=True)
-    complete = models.BooleanField(default=False,null=True, blank=False)
-    transaction_id = models.CharField(max_length=200, null=True)
-    objects = models.Manager()
+class Booking(models.Model):
+    car = models.ForeignKey(Vehicle, on_delete=models.SET_NULL,null=True, blank=True)
+    customer_name = models.ForeignKey(Customer,on_delete= models.SET_NULL,null=True, blank=True)
+    booking_date = models.DateTimeField(default=timezone.now)
+    return_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return str(self.id)
-    
-class OrderItem(models.Model):
-    vehicle = models.ForeignKey(Vehicle,on_delete= models.SET_NULL,null=True, blank=True)
-    order = models.ForeignKey(Order,on_delete= models.SET_NULL,null=True, blank=True)
-    days = models.IntegerField(default=0,null=True,blank=False)
-    date_added = models.DateTimeField(auto_now_add=True)
-    objects = models.Manager()
+        return f"{self.customer_name} - {self.car.car_name}"
 
-    @property
-    def get_total(self):
-        total = self.vehicle.price * self.days
-        return total    
-    
-class RentAddress(models.Model):
-    customer = models.ForeignKey(Customer,on_delete= models.SET_NULL,null=True, blank=True)
-    order = models.ForeignKey(Order,on_delete= models.SET_NULL,null=True, blank=True)
-    address = models.CharField(max_length=200,null=True)
-    city = models.CharField(max_length=200,null=True)
-    zipcode = models.CharField(max_length=200,null=True)
-    date_added = models.DateTimeField(auto_now_add=True)
-    objects = models.Manager()
+# class Booking(models.Model):
+#     customer = models.ForeignKey(Customer,on_delete= models.SET_NULL,null=True, blank=True)
+#     date_ordered = models.DateTimeField(auto_now_add=True)
+#     complete = models.BooleanField(default=False,null=True, blank=False)
+#     transaction_id = models.CharField(max_length=200, null=True)
+#     objects = models.Manager()
 
-    def __str__(self):
-        return self.address 
+#     def __str__(self):
+#         return str(self.id)
+    
+# class OrderItem(models.Model):
+#     vehicle = models.ForeignKey(Vehicle,on_delete= models.SET_NULL,null=True, blank=True)
+#     order = models.ForeignKey(Order,on_delete= models.SET_NULL,null=True, blank=True)
+#     days = models.IntegerField(default=0,null=True,blank=False)
+#     date_added = models.DateTimeField(auto_now_add=True)
+#     objects = models.Manager()
+
+#     @property
+#     def get_total(self):
+#         total = self.vehicle.price * self.days
+#         return total    
+    
+# class RentAddress(models.Model):
+#     customer = models.ForeignKey(Customer,on_delete= models.SET_NULL,null=True, blank=True)
+#     order = models.ForeignKey(Order,on_delete= models.SET_NULL,null=True, blank=True)
+#     address = models.CharField(max_length=200,null=True)
+#     city = models.CharField(max_length=200,null=True)
+#     zipcode = models.CharField(max_length=200,null=True)
+#     date_added = models.DateTimeField(auto_now_add=True)
+#     objects = models.Manager()
+
+#     def __str__(self):
+#         return self.address 
 
 class Hire_Request(models.Model):
     full_name = models.CharField(max_length=200)

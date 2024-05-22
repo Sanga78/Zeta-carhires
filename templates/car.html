@@ -53,25 +53,29 @@
             <div class="box">
                 <img src="{{car.car_image.url}}" alt="{{car.car_name}}">
                 <h3>{{car.car_name}}</h3>
-                <div class="price">From ksh<span> {{car.price}}</span> per hour</div>
-                <div id="phoneNumber" class="phone-number">
-                    <a href="" class="bi bi-telephone" aria-hidden="true "></a>
-                    <span id="phoneNumberText">0714710947</span>
-                </div>
-                {% if car.is_available == True %} <button class="btn" onclick="openModal('{{car.color}}', '{{car.capacity}}', '{{car.description}}')">Hire now</button>
+                <div class="price">From ksh<span> {{car.price}}</span> per day</div>
+                {% if car.is_available == True %}
+                    {% if user.is_authenticated %}
+                    <a class="btn" href="{% url 'book_car' car.id %}">Book Now</a>
+                    {% else %}
+                    <a class="btn" href="#hire_a_car">Book Now</a>
+                    {% endif %}
                 {% else %}
-                    <button class="btn" onclick="showPhoneNumber()">Hire now</button>
+                    <button class="btn" onclick="openModal()">Hire now</button>
                 {% endif %}
             </div>
             {% endfor %} 
             <div id="carModal" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeModal()">&times;</span>
-                    <h2>Car Details</h2>
-                    <p><strong>Color:</strong> <span id="modalColor"></span></p>
-                    <p><strong>Seats:</strong> <span id="modalSeats"></span></p>
-                    <p><strong>Description:</strong> <span id="modalDescription"></span></p>
-                    <button class="btn">Hire</button>
+                    <h2>Hello {% if user.is_authenticated %}
+                        {{user.username}}
+                        {% else %}
+                        Dear Customer
+                        {% endif %}</h2>
+                    <h2>The Car is currently booked or unavailable</h2>
+                    <p><strong>You can book another car or</span></p>
+                    <p><strong>Contact </strong> <span id="number"></span> for detailed information</p>
                 </div>
             </div>
         </div>
@@ -140,7 +144,7 @@
         </div> -->
         <div class="heading"><span>contact</span> us</div>
         <div class="row">
-            <form method="post" action='/hire_request'>
+            <form method="post" action='/hire_request' id="hire_a_car">
                 {% csrf_token %}
                 <fieldset>
                     {% if user.is_authenticated %}
@@ -165,20 +169,6 @@
         </div>
     </section>
     <!-- review section ends here -->
-<script>
-    function showPhoneNumber() {
-    var phoneNumber = document.getElementById("phoneNumber");
-    phoneNumber.style.display = "block";
-
-    setTimeout(function() {
-        phoneNumber.style.display = "none";
-    },10000);
-    window.addEventListener('scroll',function(){
-        phoneNumber.style.display = "none";
-    },{once:true});
-}
-
-</script>
     <!-- footer section starts here -->
 
   {% endblock main_content%}

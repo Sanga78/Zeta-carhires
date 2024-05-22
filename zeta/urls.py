@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 from car_rental import views,AdminViews,Customerviews
 from django.conf import settings
@@ -31,6 +31,7 @@ urlpatterns = [
     path('manage_vehicle',AdminViews.manage_vehicles,name="manage_vehicle"),
     path('earn_responses',AdminViews.earn_responses,name="earn_responses"),   
     path('hire_requests',AdminViews.hire_requests,name="hire_requests"),  
+    path('new_fleet',AdminViews.new_fleet,name="new_fleet"), 
     path('tour_requests',AdminViews.tour_requests,name="tour_requests"),
     path('add_customer',AdminViews.add_customer,name="add_customer"),
     path('add_customer_save',AdminViews.add_customer_save,name="add_customer_save"),
@@ -51,4 +52,6 @@ urlpatterns = [
     path('grow',Customerviews.grow,name="grow"),
     path('buy',Customerviews.buy,name="buy"),
     path('policy',views.policy,name="policy"),
+    path('book/<int:car_id>/', Customerviews.book_car, name='book_car'),
+    path('return/<int:booking_id>/', AdminViews.return_car, name='return_car'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

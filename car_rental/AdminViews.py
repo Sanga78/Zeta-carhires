@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import *
 from django.contrib import messages
@@ -26,7 +26,7 @@ def add_vehicle_save(request):
             car = Vehicle(car_name=car_name, car_image=car_image,color=color, price=price, description = description, capacity=capacity)
             car.save()
             messages.success(request,"Successfully Added car")
-            return HttpResponseRedirect(reverse("list_vehicles"))
+            return HttpResponseRedirect(reverse("manage_vehicle"))
         except:
             messages.error(request,"Failed to Add vehicle")
             return HttpResponseRedirect(reverse("add_vehicle"))
@@ -64,14 +64,16 @@ def manage_vehicles(request):
     return render(request,"Admin_templates/manage_cars.html",{"cars":cars})
 
 def earn_responses(request):    
-    requests = Hire_Request.objects.all()
     responses = Responses.objects.all()
-    return render(request,"Admin_templates/earn_requests.html",{"responses": responses,"requests": requests})
+    requests = Hire_Request.objects.all()
+    tours = Tours_request.objects.all()
+    return render(request,"Admin_templates/earn_requests.html",{"responses": responses,"requests": requests,"tours":tours})
 
 def hire_requests(request):
     responses = Responses.objects.all()
     requests = Hire_Request.objects.all()
-    return render(request,"Admin_templates/hire_requests.html",{"requests": requests,"responses": responses})
+    tours = Tours_request.objects.all()
+    return render(request,"Admin_templates/hire_requests.html",{"requests": requests,"responses": responses,"tours":tours})
 
 def add_customer(request):
     form = AddCustomerForm()
@@ -172,5 +174,19 @@ def manage_customer(request):
     return render(request,"Admin_templates/manage_customer.html",{"customers":customers})
 
 def tour_requests(request):
+    responses = Responses.objects.all()
+    requests = Hire_Request.objects.all()
     tours = Tours_request.objects.all()
-    return render(request,"Admin_templates/tour_requests.html",{"tours":tours})
+    return render(request,"Admin_templates/tour_requests.html",{"tours":tours,"responses":responses,"requests":requests})
+
+def return_car(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    booking.return_date = timezone.now()
+    booking.car.is_available = True
+    booking.car.save()
+    booking.save()
+    return HttpResponseRedirect(reverse("manage_vehicle"))
+
+def new_fleet(request):
+    fleets = Fleet.objects.all()
+    return render(request,"Admin_templates/tour_requests.html",{"fleets":fleets})

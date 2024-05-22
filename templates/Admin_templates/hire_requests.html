@@ -24,7 +24,7 @@ Hire Our cars
             <div class="card-body p-0">
               <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
-                  <a href="#" class="nav-link">
+                  <a href="{{ 'earn_requests' }}" class="nav-link">
                     <i class="fas fa-inbox"></i> Earn Requests
                     <span class="badge bg-primary float-right">{{ responses.count }}</span>
                   </a>
@@ -36,19 +36,9 @@ Hire Our cars
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-file-alt"></i> Drafts
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-filter"></i> Junk
-                    <span class="badge bg-warning float-right">0</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-trash-alt"></i> Trash
+                  <a href="{{ 'tour_requests' }}" class="nav-link">
+                    <i class="far fa-envelope"></i> Tour Requests
+                    <span class="badge bg-primary float-right">{{ tours.count }}</span>
                   </a>
                 </li>
               </ul>

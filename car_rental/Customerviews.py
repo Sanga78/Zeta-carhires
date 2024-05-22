@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from .models import *
 from django.urls import reverse
+from django.utils import timezone
+
 # Create your views here.
 def earn(request):
     return render(request,'earn.html')
@@ -67,33 +69,47 @@ def tour_request(request):
             messages.error(request,"Failed to send message")
             return HttpResponseRedirect(reverse("tours"))
 
-def rent_vehicle(request):
-    id = request.POST['id']
-    vehicle = Vehicle.objects.get(id = id)
-    cost_per_day = int(vehicle.capacity)*13
-    return render(request, 'customer/confirmation.html', {'vehicle':vehicle, 'cost_per_day':cost_per_day})
+# def rent_vehicle(request):
+#     id = request.POST['id']
+#     vehicle = Vehicle.objects.get(id = id)
+#     cost_per_day = int(vehicle.capacity)*13
+#     return render(request, 'customer/confirmation.html', {'vehicle':vehicle, 'cost_per_day':cost_per_day})
      
-def confirm(request):
-    vehicle_id = request.POST['id']
-    username = request.user
-    user = CustomUser.objects.get(username = username)
-    days = request.POST['days']
-    vehicle = Vehicle.objects.get(id = vehicle_id)
-    if vehicle.is_available:
-        car_dealer = vehicle.dealer
-        rent = (int(vehicle.capacity))*13*(int(days))
-        car_dealer.wallet += rent
-        car_dealer.save()
-        try:
-            order = Order(vehicle = vehicle, car_dealer = car_dealer, user = user, rent=rent, days=days)
-            order.save()
-        except:
-            order = Order.objects.get(vehicle = vehicle, car_dealer = car_dealer, user = user, rent=rent, days=days)
-        vehicle.is_available = False
-        vehicle.save()
-        return render(request, 'customer/confirmed.html', {'order':order})
-    else:
-        return render(request, 'customer/order_failed.html')
+# def confirm(request):
+#     vehicle_id = request.POST['id']
+#     username = request.user
+#     user = CustomUser.objects.get(username = username)
+#     days = request.POST['days']
+#     vehicle = Vehicle.objects.get(id = vehicle_id)
+#     if vehicle.is_available:
+#         car_dealer = vehicle.dealer
+#         rent = (int(vehicle.capacity))*13*(int(days))
+#         car_dealer.wallet += rent
+#         car_dealer.save()
+#         try:
+#             order = Order(vehicle = vehicle, car_dealer = car_dealer, user = user, rent=rent, days=days)
+#             order.save()
+#         except:
+#             order = Order.objects.get(vehicle = vehicle, car_dealer = car_dealer, user = user, rent=rent, days=days)
+#         vehicle.is_available = False
+#         vehicle.save()
+#         return render(request, 'customer/confirmed.html', {'order':order})
+#     else:
+#         return render(request, 'customer/order_failed.html')
 
 def customer_home(request):
     return render(request,'index.html')
+
+def book_car(request, car_id):
+    car = get_object_or_404(Vehicle, id=car_id)
+    if car.is_available:
+        if request.method == 'POST':
+            customer_id = request.POST.get('customer_id')
+            customer_name = Customer.objects.get(admin=customer_id)
+            Booking.objects.create(car=car, customer_name=customer_name)
+            car.is_available = False
+            car.save()
+            return redirect('car')
+        return render(request, 'bookings/book_car.html', {'car': car})
+    else:
+        return HttpResponse(f"Car is not available. Please call +123456789 for more information.")
