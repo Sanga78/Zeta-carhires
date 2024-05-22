@@ -1,0 +1,73 @@
+{% extends 'Admin_templates/base.html' %}
+{% block page_title %}
+Bookings
+{% endblock page_title %}
+{% load static %}
+{% block main_content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Booking Details</h3>
+  
+                  <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+  
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-default">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Car Name</th>
+                        <th>Customer Name</th>
+                        <th>Status</th>
+                        <th>Date Booked</th>
+                        <th>Date Returned</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for booking in bookings %}
+                      <tr>
+                        <td>{{ booking.id }}</td>
+                        <td>{{ booking.car.car_name }}</td>
+                        <td>{{ booking.customer_name.admin.first_name }} {{ booking.customer_name.admin.last_name }}</td>
+                        {% if  booking.car.is_available  %}
+                        <td style="color: red;">Returned</td>
+                        {% else %}
+                        <td style="color: blue;">Active</td>
+                        {% endif %}
+                        <td>{{ booking.booking_date }}</td>
+                        <td>{{ booking.return_date }}</td>
+                        {% if  booking.car.is_available  %}
+                        <td><a href="" class="btn btn-success">Returned</a></td>
+                        {% else %}
+                        <td><a href="/return/{{ booking.id }}" class="btn btn-danger">Return</a></td>
+                        {% endif %}
+                      </tr>
+                     {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+  {% endblock main_content %}

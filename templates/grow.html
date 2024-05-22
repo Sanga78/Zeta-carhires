@@ -8,19 +8,20 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-9">
-                <form action="" method="post" class="delay-neg-500">
+                <form action="/list_fleet" method="post" class="delay-neg-500">
+                    {% csrf_token %}
                     <h3 style="color: rgb(8, 94, 180);">Book a call with us</h3>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, quam.</p>
                     {% if user.is_authenticated %}
-                    <div class="form-group mt-3"><input type="text" class="form-control" id="personal_name" name="personal_name" placeholder="Personal Name" value="{{ user.first_name }} {{ user.last_name }}"></div>
-                    <div class="form-group mt-3"><input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ user.email }}"></div>
+                    <div class="form-group mt-3"><input type="text" class="form-control" id="personal_name" name="personal_name" placeholder="Personal Name" value="{{ user.first_name }} {{ user.last_name }}" required></div>
+                    <div class="form-group mt-3"><input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ user.email }}" required></div>
                     {% else %}
-                    <div class="form-group mt-3"><input type="text" class="form-control" id="personal_name" name="personal_name" placeholder="Personal Name"></div>
-                    <div class="form-group mt-3"><input type="email" class="form-control" id="email" name="email" placeholder="Email"></div>
+                    <div class="form-group mt-3"><input type="text" class="form-control" id="personal_name" name="personal_name" placeholder="Personal Name" required></div>
+                    <div class="form-group mt-3"><input type="email" class="form-control" id="email" name="email" placeholder="Email" required></div>
                     {% endif %}
                     <div class="form-group mt-3"><input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name"></div>
-                    <div class="form-group mt-3"><input type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone"></div>
-                    <div class="form-group mt-3"><input type="number" class="form-control" id="cars" name="cars" placeholder="Number of cars"></div>
+                    <div class="form-group mt-3"><input type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone" required></div>
+                    <div class="form-group mt-3"><input type="number" class="form-control" id="cars" name="cars" placeholder="Number of cars" required></div>
                     <div class="text-center"><button type="submit" class="btn">book</button></div>
                 </form>
             </div>

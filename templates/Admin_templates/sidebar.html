@@ -37,9 +37,28 @@
             {% url 'manage_vehicle' as manage_vehicle %}
             {% url 'edit_vehicle' vehicle_id=id as edit_vehicle %}
             <a href="{{ 'manage_vehicle' }}" class="nav-link {% if request.path == manage_vehicle %} active {% endif %}{% if request.path == edit_vehicle %} active {% endif %}">
-              <i class="nav-icon fas fa-car"></i>
+              <i class="nav-icon fas fa-taxi"></i>
               <p>
                 Manage Cars
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'bookings' as bookings %}
+            {% url 'return_car' booking_id=id as return_car %}
+            <a href="{{ 'bookings' }}" class="nav-link {% if request.path == bookings %} active {% endif %}{% if request.path == return_car %} active {% endif %}">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Bookings
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'new_fleet' as new_fleet %}
+            <a href="{{ 'new_fleet' }}" class="nav-link {% if request.path == new_fleet %} active {% endif %}">
+              <i class="nav-icon fas fa-plus"></i>
+              <p>
+                New Fleet
               </p>
             </a>
           </li>
