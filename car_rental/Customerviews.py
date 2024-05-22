@@ -29,6 +29,24 @@ def response(request):
 def grow(request):
     return render(request,'grow.html')
 
+def list_fleet(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed !</h2>")
+    else:
+        full_name = request.POST['personal_name']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
+        company_name = request.POST['company_name']
+        no_of_cars = request.POST.get('cars')
+        try:
+            fleet =Fleet(full_name=full_name, company_name=company_name, phone_number=phone_number,email=email,no_of_cars=no_of_cars)
+            fleet.save()
+            messages.success(request,"Your request has been received successfully We will get back to you")
+            return HttpResponseRedirect(reverse("grow"))
+        except:
+            messages.error(request,"Failed to send message")
+            return HttpResponseRedirect(reverse("grow"))
+        
 def hire_request(request):
     if request.method!="POST":
         return HttpResponse("<h2>Method Not Allowed !</h2>")
