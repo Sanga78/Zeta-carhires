@@ -645,12 +645,26 @@ textarea{
 
 .buy {
   margin: 0;
+  padding: 0;
   font-family: sans-serif;
   background: #f5f6f7;
 }
-.buy .home{
-  min-height: 90vh;
-}  
+.buy .container{
+  position: relative;
+  margin-top: 10%;
+  min-height: 50vh;
+  text-align: center;
+  top: 0;
+  z-index: 1;
+  place-content: center;
+} 
+.buy .container .content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 3rem;
+} 
 .buy .head{
   text-align: center;
   text-transform: uppercase;
@@ -1215,7 +1229,7 @@ animation: revealNextWord 6s cubic-bezier(0.57, 1.52, 0.9, 1.08) 4.5s infinite;
 }
 
 }
-.carousel {
+/*.carousel {
   margin-top: 2%;
   display: flex;
   overflow: hidden;
@@ -1223,13 +1237,14 @@ animation: revealNextWord 6s cubic-bezier(0.57, 1.52, 0.9, 1.08) 4.5s infinite;
   height: 90vh;
   width: 100vw;
 }
-.carousel-image {
+ .carousel-image {
   min-width: 100%;
   min-height: 100%;
+  object-fit: cover;
   transition: transform 0.5s ease;
-}
+} */
 
-.centered-text {
+/* .centered-text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1237,7 +1252,7 @@ animation: revealNextWord 6s cubic-bezier(0.57, 1.52, 0.9, 1.08) 4.5s infinite;
   color: rgb(0, 60, 255);
   font-size: 5rem;
   text-shadow: 2px 2px 4px rgba(255,255,255,0.6);
-}
+} */
 
 
 .test {
@@ -1373,6 +1388,42 @@ animation: revealNextWord 6s cubic-bezier(0.57, 1.52, 0.9, 1.08) 4.5s infinite;
 #policies{
   margin-top: 8%;
 }
+.call_us{
+  margin-top: 3rem;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.phone{
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 36px;
+  position: absolute;
+  cursor: pointer;
+}
+.cta{
+  height: 65px;
+  width: 250px;
+  color: white;
+  z-index: 1;
+  transition: 1.2s;
+  background: linear-gradient(to right bottom,#4776E6,#8E54E9);
+}
+.number{
+  height: 65px;
+  width: 250px;
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../images/about.jpg);
+  background-size: cover;
+  color: white;
+  box-shadow: 3px 3px 30px #aaa;
+}
+.cta:hover{
+  transform: translatex(-80%);
+  transition: 1.2s;
+}
 
 @media(max-width: 450px) {
   .item {
@@ -1412,6 +1463,14 @@ animation: revealNextWord 6s cubic-bezier(0.57, 1.52, 0.9, 1.08) 4.5s infinite;
   
   .modal-content {
       width: 80%;
+  }
+  .number{
+    height: 42px;
+    width: 220px;
+  }
+  .cta{
+    height: 42px;
+    width: 220px;
   }
 }
 
@@ -1485,6 +1544,17 @@ animation: revealNextWord 6s cubic-bezier(0.57, 1.52, 0.9, 1.08) 4.5s infinite;
   .earn .home{
     max-height: 86vh;
   }
+  .number{
+    height: 50px;
+    width: 220px;
+  }
+  .cta{
+    height: 50px;
+    width: 220px;
+  }
+  .buy .container{
+    margin-top: 30%;
+  } 
 }
 
 @media (min-aspect-ratio: 16/9) {

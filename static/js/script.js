@@ -35,15 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   
     });
-  });
-  let currentIndex = 0;
-  const images = document.querySelectorAll('.carousel-image');
-  const changeImage = () => {
-      images[currentIndex].classList.add('hidden');
-      currentIndex = (currentIndex + 1) % images.length;
-      images[currentIndex].classList.remove('hidden');
-  }
-  setInterval(changeImage, 3000); // Change image every 3 seconds
+});
+  // let currentIndex = 0;
+  // const images = document.querySelectorAll('.carousel-image');
+  // const changeImage = () => {
+  //     images[currentIndex].classList.add('hidden');
+  //     currentIndex = (currentIndex + 1) % images.length;
+  //     images[currentIndex].classList.remove('hidden');
+  // }
+  // setInterval(changeImage, 3000); // Change image every 3 seconds
 
   const slider = document.querySelector('.slider');
   const items = document.querySelectorAll('.item');
