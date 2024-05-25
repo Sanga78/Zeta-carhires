@@ -2,40 +2,123 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
-	<link rel="stylesheet" href="/static/styles/navbar.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zeta CarHires| Sign Up</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
 </head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="{{ 'index' }}"><b>Zeta</b>CarHires</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to Zeta CarHires</p>
 
-<body>
-
-    <div class="form" id="form">
-        <div id="create-account" class="login_container">
-            <h1>Sign Up below</h1>
-            <form method="post" autocomplete="off">
-                {% csrf_token %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <h2 class="error">{{message}}</h2>
-                    {% endfor %}
-                {% endif %}
-                <input id="adm_num" name="adm_num" type="text" placeholder="Admission number">
-                <input id="fname" name="fname" type="text" placeholder="First name">
-                <input id="sname" name="sname" type="text" placeholder="Second name">
-                <input id="img" name="img" type="image" placeholder="Your image">
-                <input id="password1" name="password1" type="password" placeholder="Password">
-                <input id="password2" name="password2" type="password" placeholder="Confirm Password">
-                <button id="Register_btn" type="submit">Sign Up</button>
-                <center><a id="return_btn" href="{% url 'login' %}">Already have an account</a></center>
-            </form>
+      <form action="/login" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="first_name" placeholder="Enter your First Name">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" name="last_name" placeholder="Enter your Last Name">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="email" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
         </div>
-    </div>	
-    </div> 
-   
+        <div class="input-group mb-3">
+            <input type="address" class="form-control" name="address" placeholder="Enter your Address">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-address-card"></span>
+              </div>
+            </div>
+          </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Profile Picture</label>
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="exampleInputFile" name="profile_pic">
+                <label class="custom-file-label" for="exampleInputFile">Choose Picture</label>
+              </div>
+            </div>
+          </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+          </div>
+          <!-- /.col -->
+        </div>
+        <div class="row">
+          {% if messages %}
+          <div class="col-12">
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <span class="alert alert-danger" style="margin-top: 10px;">{{ message }}</span>
+            {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+      </form>
+      <p class="mb-0">
+        Already have an account? <a href="{{ 'loginpage' }}" class="text-center">Log In</a>
+      </p>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
 </body>
 </html>
