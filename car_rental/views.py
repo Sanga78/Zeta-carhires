@@ -3,10 +3,49 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import login,logout
 from car_rental.EmailBackEnd import EmailBackEnd
 from django.contrib import  messages
-from .models import Vehicle
+from .models import Vehicle,CustomUser
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
 def index(request):
     return render(request,'index.html')
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        address = request.POST["address"]
+        password = request.POST['password1']
+        password2 = request.POST['password2']
+        
+        profile_pic = request.FILES['profile_pic']
+        fs = FileSystemStorage()
+        filename = fs.save(profile_pic.name,profile_pic)
+        profile_pic_url = fs.url(filename)
+        if password == password2:
+            if CustomUser.objects.filter(email=email).exists():
+                messages.info(request,'Email Already Exists')
+                return redirect('register')
+            elif CustomUser.objects.filter(username=username).exists():
+                messages.info(request,'Username Already Exists')
+                return redirect('register')
+            else:
+                try:
+                    user=CustomUser.objects.create_user(username=username,password=password,email=email,last_name=last_name,first_name=first_name,user_type=2)
+                    user.customer.address = address
+                    user.customer.profile_pic = profile_pic_url
+                    user.save()
+                    messages.success(request,"Registration Successfull!")
+                    return HttpResponseRedirect(reverse("loginpage"))
+                except:
+                    messages.error(request,"Failed to Add Customer")
+                    return HttpResponseRedirect(reverse("register"))
+        else:
+            messages.info(request,'Password Not The Same')
+            return redirect('register')
+    else:
+        return render(request,'register.html')
 
 def loginPage(request):
     return render(request,'login.html')
