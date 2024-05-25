@@ -39,6 +39,7 @@ urlpatterns = [
     path('edit_customer/<str:customer_id>',AdminViews.edit_customer,name="edit_customer"),
     path('edit_customer_save',AdminViews.edit_customer_save,name="edit_customer_save"),
     path('manage_customer',AdminViews.manage_customer,name="manage_customer"),
+    path('register',views.register,name="register"),
     path('loginpage',views.loginPage,name="show_login"),
     path('login',views.Login,name="do_login"),
     path('get_user_details',views.GetUserDetails),
