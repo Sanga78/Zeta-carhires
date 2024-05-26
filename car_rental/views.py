@@ -15,29 +15,21 @@ def register(request):
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         email = request.POST['email']
-        address = request.POST["address"]
-        password = request.POST['password1']
+        password = request.POST['password']
         password2 = request.POST['password2']
-        
-        profile_pic = request.FILES['profile_pic']
-        fs = FileSystemStorage()
-        filename = fs.save(profile_pic.name,profile_pic)
-        profile_pic_url = fs.url(filename)
         if password == password2:
             if CustomUser.objects.filter(email=email).exists():
-                messages.info(request,'Email Already Exists')
-                return redirect('register')
+                messages.info(request,'User Already Exists')
+                return redirect('show_login')
             elif CustomUser.objects.filter(username=username).exists():
                 messages.info(request,'Username Already Exists')
-                return redirect('register')
+                return redirect('show_login')
             else:
                 try:
                     user=CustomUser.objects.create_user(username=username,password=password,email=email,last_name=last_name,first_name=first_name,user_type=2)
-                    user.customer.address = address
-                    user.customer.profile_pic = profile_pic_url
                     user.save()
                     messages.success(request,"Registration Successfull!")
-                    return HttpResponseRedirect(reverse("loginpage"))
+                    return HttpResponseRedirect(reverse("show_login"))
                 except:
                     messages.error(request,"Failed to Add Customer")
                     return HttpResponseRedirect(reverse("register"))

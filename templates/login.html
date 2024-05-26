@@ -18,17 +18,17 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Zeta</b>CarHires</a>
+    <a href="{{ 'index' }}"><b>Zeta</b>CarHires</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to Zeta CarHires</p>
 
-      <form action="/login" method="post">
+      <form action="/login" method="post" autocomplete="off">
         {% csrf_token %}
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email" placeholder="Email">
+          <input type="email" class="form-control" name="email" placeholder="Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title=" Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -70,16 +70,13 @@
         Don't have an account? <a href="{{ 'register' }}" class="text-center">Sign Up</a>
       </p>
     </div>
+    <p class="col-8">
+      <a class="btn btn-danger" href="{{ 'index' }}">Cancel</a>
+    </p>
     <!-- /.login-card-body -->
   </div>
 </div>
 <!-- /.login-box -->
 
-<!-- jQuery -->
-<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
-<!-- Bootstrap 4 -->
-<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
 </body>
 </html>

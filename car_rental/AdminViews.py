@@ -112,7 +112,7 @@ def add_customer_save(request):
             return render(request,"Admin_templates/add_customer.html",{"form":form})
 
 def edit_customer(request,customer_id):
-    request.session['student_id']=customer_id
+    request.session['customer_id']=customer_id
     customer=Customer.objects.get(admin=customer_id)
     form = EditCustomerForm()
     form.fields['email'].initial=customer.admin.email
@@ -163,7 +163,7 @@ def edit_customer_save(request):
                 return HttpResponseRedirect(reverse("edit_customer",kwargs={"customer_id":customer_id}))
             except:
                 messages.error(request,"Failed to Edit Customer")
-                return HttpResponseRedirect(reverse("edit_student",kwargs={"customer_id":customer_id}))
+                return HttpResponseRedirect(reverse("edit_customer",kwargs={"customer_id":customer_id}))
         else:
             form = EditCustomerForm(request.POST)
             customer = Customer.objects.get(admin=customer_id)

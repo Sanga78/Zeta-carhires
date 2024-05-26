@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Car</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Hi {{user.username}}</h1>
+    <h2>Do you want to book {{car.car_name}} at ksh<strong>{{car.price}}</strong></h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="customer_id" value="{{ user.id }}">
+        <button type="submit">Book</button>
+    </form>
+</body>
+</html>

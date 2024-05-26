@@ -183,3 +183,50 @@ function showPhoneNumber() {
       phoneNumber.style.display = "none";
   },{once:true});
 }
+
+var signupEmailIn = document.getElementById("email_signUp");
+var firstname = document.getElementById("first_name");
+var lastname = document.getElementById("last_name");
+var username = document.getElementById("username");
+var signupPasswordIn = document.getElementById("password1");
+var confirmSignupPasswordIn = document.getElementById("password2");
+var registerButton = document.getElementById("Register_btn");
+
+var email,
+    username,
+    firstname,
+    lastname,
+    signupEmail,
+    signupPassword,
+    confirmSignupPassword;
+
+registerButton.addEventListener("click", function() {
+    var isVarified = true;
+
+    signupEmail = signupEmailIn.value;
+    username = username.value;
+    firstname = firstname.value;
+    lastname = lastname.value;
+
+    signupPassword = signupPasswordIn.value;
+    confirmSignupPassword = confirmSignupPasswordIn.value;
+
+    if (signupPassword != confirmSignupPassword) {
+        window.alert("Passwords does not match");
+        isVarified = false;
+    }
+
+    if (signupEmail == null ||
+        username == null ||
+        firstname == null ||
+        lastname == null ||
+        signupPassword == null ||
+        confirmSignupPassword == null) {
+        window.alert("Please fill all the required fields");
+    }
+
+    if (isVarified) {
+        window.alert("Acount Created Successfully");
+        window.location.href = "{{ 'loginpage' }}";
+    }
+});

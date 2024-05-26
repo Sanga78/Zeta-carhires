@@ -56,5 +56,7 @@ urlpatterns = [
     path('buy',Customerviews.buy,name="buy"),
     path('policy',views.policy,name="policy"),
     path('book/<int:car_id>/', Customerviews.book_car, name='book_car'),
-    path('return/<int:booking_id>/', AdminViews.return_car, name='return_car'),
+    path('return/<int:booking_id>/', AdminViews.return_car, name='return_car'),    
+    path('update_profile/<str:customer_id>',Customerviews.update_profile,name="update_profile"),
+    path('profile_save',Customerviews.profile_save,name="profile_save"),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

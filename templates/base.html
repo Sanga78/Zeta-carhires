@@ -28,8 +28,8 @@
 			<li>{% url 'grow' as grow %}<a href="{{ 'grow' }}" class="{% if request.path == grow %}active{% endif %}">Grow</a></li>
 			<li>{% url 'buy' as buy %}<a href="{{ 'buy' }}" class=" {% if request.path == buy %}active{% endif %} ">Buy a car</a></li>
 			<li>{% url 'about' as about %}<a href="{{ 'about' }}" class="{% if request.path == about %}active{% endif %}">About Us</a></li>
-			<li>{% url 'policy' as policy %}<a href="{{ 'policy' }}" class="{% if request.path == policy %} active{% endif %}">Policy</a></li>
 			{% if user.is_authenticated %}
+			<li>{% url 'update_profile' customer_id=id as update_profile %}<a href="/update_profile/{{ user.id }}" class="{% if request.path == update_profile %}active{% endif %}">Profile</a></li>
 			<li>{% url 'logout' as logout %}<a href="{{ 'logout' }}" class="{% if request.path == logout %} active{% endif %}" style="color:red">Logout</a></li>
 			{% else %}
 			<li>{% url 'loginpage' as loginpage %}<a href="{{ 'loginpage' }}" class="{% if request.path == loginpage %} active{% endif %}" style="color:blue">Login</a></li>
