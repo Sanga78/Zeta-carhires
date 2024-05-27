@@ -137,13 +137,12 @@ def edit_customer_save(request):
             email = form.cleaned_data["email"] 
             address = form.cleaned_data["address"]
 
-            if request.FILES.get('profile_pic',False):
-                profile_pic = request.FILES('profile_pic')
+            profile_pic_url = None
+            if 'profile_pic' in request.FILES:
+                profile_pic = request.FILES['profile_pic']
                 fs = FileSystemStorage()
-                filename = fs.save(profile_pic.name,profile_pic)
-                profile_pic_url = fs.url(filename)
-            else:
-                profile_pic_url = None 
+                filename = fs.save(profile_pic.name, profile_pic)
+                profile_pic_url = fs.url(filename) 
 
             try:
                 user=CustomUser.objects.get(id=customer_id)
@@ -155,7 +154,7 @@ def edit_customer_save(request):
 
                 customer = Customer.objects.get(admin=customer_id)
                 customer.address=address
-                if profile_pic_url != None:
+                if profile_pic_url:
                     customer.profile_pic = profile_pic_url
                 customer.save() 
                 del request.session['customer_id']

@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect,get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from .models import *
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
 from .forms import UpdateProfileForm
+
 # Create your views here.
 def earn(request):
     return render(request,'earn.html')
@@ -132,60 +133,62 @@ def book_car(request, car_id):
     else:
         return HttpResponse(f"Car is not available. Please call +123456789 for more information.")
 
-def update_profile(request,customer_id):
-    request.session['customer_id']=customer_id
-    customer=Customer.objects.get(admin=customer_id)
-    form = UpdateProfileForm()
-    form.fields['email'].initial=customer.admin.email
-    form.fields['first_name'].initial=customer.admin.first_name
-    form.fields['last_name'].initial=customer.admin.last_name
-    form.fields['username'].initial=customer.admin.username
-    form.fields['address'].initial=customer.address
-    return render(request,"profile.html",{"form":form,"id":customer_id,"username":customer.admin.username})
+def update_profile(request, customer_id):
+    request.session['customer_id'] = customer_id
+    customer = get_object_or_404(Customer, admin=customer_id)
+    form = UpdateProfileForm(initial={
+        'email': customer.admin.email,
+        'first_name': customer.admin.first_name,
+        'last_name': customer.admin.last_name,
+        'username': customer.admin.username,
+        'address': customer.address
+    })
+    return render(request, "profile.html", {"form": form, "id": customer_id, "username": customer.admin.username})
 
 def profile_save(request):
     if request.method != "POST":
         return HttpResponse("<h2>Method Not Allowed</h2>")
-    else:
-        customer_id = request.session.get("customer_id")
-        if customer_id == None:
-            return HttpResponseRedirect(reverse("profile_save"))
-        form = UpdateProfileForm(request.POST,request.FILES)
-        if form.is_valid():
-            first_name = form.cleaned_data["first_name"]
-            last_name = form.cleaned_data["last_name"]
-            username = form.cleaned_data["username"]
-            email = form.cleaned_data["email"] 
-            address = form.cleaned_data["address"]
+    
+    customer_id = request.session.get("customer_id")
+    if not customer_id:
+        return HttpResponseRedirect(reverse("update_profile", kwargs={"customer_id": customer_id}))
+    
+    form = UpdateProfileForm(request.POST, request.FILES)
+    if form.is_valid():
+        first_name = form.cleaned_data["first_name"]
+        last_name = form.cleaned_data["last_name"]
+        username = form.cleaned_data["username"]
+        email = form.cleaned_data["email"]
+        address = form.cleaned_data["address"]
+        
+        profile_pic_url = None
+        if 'profile_pic' in request.FILES:
+            profile_pic = request.FILES['profile_pic']
+            fs = FileSystemStorage()
+            filename = fs.save(profile_pic.name, profile_pic)
+            profile_pic_url = fs.url(filename)
+        
+        try:
+            user = CustomUser.objects.get(id=customer_id)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.username = username
+            user.email = email
+            user.save()
 
-            if request.FILES.get('profile_pic',False):
-                profile_pic = request.FILES('profile_pic')
-                fs = FileSystemStorage()
-                filename = fs.save(profile_pic.name,profile_pic)
-                profile_pic_url = fs.url(filename)
-            else:
-                profile_pic_url = None 
-
-            try:
-                user=CustomUser.objects.get(id=customer_id)
-                user.first_name = first_name
-                user.last_name = last_name
-                user.username = username
-                user.email = email
-                user.save()
-
-                customer = Customer.objects.get(admin=customer_id)
-                customer.address=address
-                if profile_pic_url != None:
-                    customer.profile_pic = profile_pic_url
-                customer.save() 
-                del request.session['customer_id']
-                messages.success(request,"Successfully Updated Profile")
-                return HttpResponseRedirect(reverse("profile_save",kwargs={"customer_id":customer_id}))
-            except:
-                messages.error(request,"Failed to Update Profile")
-                return HttpResponseRedirect(reverse("profile_save",kwargs={"customer_id":customer_id}))
-        else:
-            form = UpdateProfileForm(request.POST)
             customer = Customer.objects.get(admin=customer_id)
-            return render(request,"profile.html",{"form":form,"id":customer_id,"username":customer.admin.username})
+            customer.address = address
+            if profile_pic_url:
+                customer.profile_pic = profile_pic_url
+            customer.save()
+
+            del request.session['customer_id']
+            messages.success(request, "Successfully Updated Profile")
+            return HttpResponseRedirect(reverse("index"))  # Redirect to the index page after successful update
+        except CustomUser.DoesNotExist:
+            messages.error(request, "Failed to Update Profile: User not found")
+        except Exception as e:
+            messages.error(request, f"Failed to Update Profile: {str(e)}")
+    
+    customer = get_object_or_404(Customer, admin=customer_id)
+    return render(request, "profile.html", {"form": form, "id": customer_id, "username": customer.admin.username})
