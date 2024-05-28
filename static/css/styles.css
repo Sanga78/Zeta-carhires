@@ -1448,24 +1448,24 @@ footer{
 footer h3{
   color: var(--white);
 }
-.line{
+footer .line{
   width: 55px;
   height: 2px;
   background-color: var(--main-color);
   margin-bottom: 20px;
 }
-ul {
+footer ul {
   list-style: none;
   padding: 0;
 }
-ul li{
+footer ul li{
   margin-bottom: 10px;
 }
-ul li a{
+footer ul li a{
   color: #fff;
   text-decoration: none;
 }
-ul li a:hover{
+footer ul li a:hover{
   text-decoration: underline;
 }
 .get-in-touch p,

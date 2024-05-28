@@ -70,13 +70,13 @@
 			<h3>Quick Links</h3>
 			<div class="line"></div>
 			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="templates/car.html">Hire a car</a></li>
-				<li><a href="templates/tours.html">Tours & Travel</a></li>
-				<li><a href="templates/earn.html">Earn</a></li>
-				<li><a href="templates/grow.html">Grow</a></li>
-				<li><a href="templates/buy.html">Buy a car</a></li>
-				<li><a href="templates/about.html">About Us</a></li>
+				<li>{% url 'index' as index %}<a href="{{ 'index' }}" class = "{% if request.path == index %} active {% endif %}">Home</a></li>
+			<li>{% url 'car' as car %}<a href="{{ 'car' }}" class="{% if request.path == car %} active {% endif %}">Hire a car</a></li>
+			<li>{% url 'tours' as tours %}<a href="{{ 'tours' }}" class="{% if request.path == tours %} active {% endif %}">Tours & Travel</a></li>
+			<li>{% url 'earn' as earn %}<a href="{{ 'earn' }}" class ="{% if request.path == earn %}active{% endif %}">Earn</a></li>
+			<li>{% url 'grow' as grow %}<a href="{{ 'grow' }}" class="{% if request.path == grow %}active{% endif %}">Grow</a></li>
+			<li>{% url 'buy' as buy %}<a href="{{ 'buy' }}" class=" {% if request.path == buy %}active{% endif %} ">Buy a car</a></li>
+			<li>{% url 'about' as about %}<a href="{{ 'about' }}" class="{% if request.path == about %}active{% endif %}">About Us</a></li>
 			</ul>
 		</div>
 		<div class="get-in-touch">
@@ -105,5 +105,5 @@
 <!-- footer section ends here -->
 <div class="credit ">Zeta <span>carhires</span> | all rights reserved</div>
 </body>
-<script src="./js/script.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
 </html>
