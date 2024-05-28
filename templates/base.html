@@ -59,38 +59,51 @@
     {% endif %}
 	{% block main_content %}{% endblock main_content %}
 <!-- footer section starts here -->
-
-<section class="footer ">
-	<div class="div1">
-		<div class="logo">
-			<img src=" {% static 'images/Logo.jpg' %}" alt="logo" style="border: none;">
+<footer>
+	<div class="footer-container">
+		<div class="about-us">
+			<h3>About Us</h3>
+			<div class="line"></div>
+			<p>Zeta CarHire offers a comprehensive range of services to meet your travel and automotive needs in Kenya. Whether you are looking for a rental vehicle for business travel or vacation, or seeking to purchase a high quality used car, we have you covered. Headquarters in Eldoret, our fleet and sales team can cater to your needs not only in Eldoret but across Kenya. Experience seamless car rental and sales services with us.</p>
 		</div>
-		<div class="links ">
-			<a href="#">Home</a>
-			<a href="templates/car.html">Hire a car</a>
-			<a href="templates/tours.html">Tours & Travel</a>
-			<a href="templates/earn.html">Earn</a>
-			<a href="templates/grow.html">Grow</a>
-			<a href="templates/buy.html">Buy a car</a>
-			<a href="" class = "{% if request.path == index %} active {% endif %}">About Us</a>
-			<a href="templates/policy.html">Privacy Policy</a>
+		<div class="quick-links">
+			<h3>Quick Links</h3>
+			<div class="line"></div>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="templates/car.html">Hire a car</a></li>
+				<li><a href="templates/tours.html">Tours & Travel</a></li>
+				<li><a href="templates/earn.html">Earn</a></li>
+				<li><a href="templates/grow.html">Grow</a></li>
+				<li><a href="templates/buy.html">Buy a car</a></li>
+				<li><a href="templates/about.html">About Us</a></li>
+			</ul>
 		</div>
-		<div class="cont">
-			<h3>Mobile Number</h3>
-			<h3>Location</h3>
-			<h3>customer service mail</h3>
+		<div class="get-in-touch">
+			<h3>Get in Touch</h3>
+			<div class="line"></div>
+			<p><i class="fas fa-phone"></i> +254714710947</p>
+			<p><i class="fa-solid fa-location-dot"></i> Zeta CarHires, Eldoret Kenya</p>
+			<p><i class="fas fa-envelope"></i> info@zetacarhires.com</p>
+			<div class="social-media">
+				<a href=""><i class="fab fa-facebook-f"></i></a>
+				<a href=""><i class="fab fa-whatsapp"></i></a>
+				<a href=""><i class="fab fa-instagram"></i></a>
+				<a href=""><i class="fab fa-twitter"></i></a>
+			</div>
+		</div>
+		<div class="policies">
+			<h3>Our Policies</h3>
+			<div class="line"></div>
+			<ul>
+				<li><a href="policy.html">Terms and conditions</a></li>
+				<li><a href="policy.html">FAQ's</a></li>
+			</ul>
 		</div>
 	</div>
-	<div class="share ">
-		<a href="" class="bi bi-facebook" aria-hidden="true "></a>
-		<a href="" class="bi bi-twitter" aria-hidden="true "></a>
-		<a href="" class="bi bi-instagram" aria-hidden="true "></a>
-		<a href="" class="bi bi-telephone" aria-hidden="true "></a>
-		<a href="" class="bi bi-whatsapp" aria-hidden="true "></a>
-    </div>
-</section>
+</footer>
 <!-- footer section ends here -->
 <div class="credit ">Zeta <span>carhires</span> | all rights reserved</div>
 </body>
-<script src="{% static "js/script.js" %}"></script>
+<script src="./js/script.js"></script>
 </html>
