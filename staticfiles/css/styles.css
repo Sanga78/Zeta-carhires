@@ -356,22 +356,32 @@ color: var(--white);
 .hire .home .cont .three p{
   font-size: 3rem;
 }
-
 .menu .box-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  place-items: center;
+  gap: 2rem;
 }
 
 .menu .box-container .box {
+  max-width: 350px;
+  display: flex;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  padding-bottom: 0.8rem;
   text-align: center;
-  max-width: 450px;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
-.menu .box-container .box img {
-  height: 15rem;
+.menu .box-container .box .image-container {
+  flex: 60;
+}
+.menu .box-container .box .desc{
+  flex: 40;
+}
+.menu .box-container .box .image-container img{
+  object-fit: cover;
   width: 100%;
 }
 .menu .box-container .box img:hover{
@@ -381,29 +391,28 @@ color: var(--white);
 .menu .box-container .box h3 {
   text-align: center;
   color: var(--black);
-  font-size: 1.5rem;
-  padding: .5rem 0;
+  font-size: 2rem;
+  padding: 1rem 0;
 }
 
 .menu .box-container .box .price {
   text-align: center;
   color: var(--black);
-  font-size: 1.5rem;
-  padding: .3rem 0;
+  font-size: 2.5rem;
+  padding: .5rem 0;
 }
 .menu .box-container .box button{
 width: 85%;
-margin: 0.5em auto;
+margin: 1em auto;
 min-width: 20vw;
 }
 .menu .box-container .box button:hover{
   background-color:rgba(8, 94, 180,0.75);
 }
 .menu .box-container .box .price span {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   color: var(--main-color);
 }
-
 .review .box-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));

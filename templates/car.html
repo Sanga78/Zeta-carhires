@@ -51,18 +51,22 @@
         <div class="box-container"> 
             {% for car in cars %}          
             <div class="box">
-                <img src="{{car.car_image.url}}" alt="{{car.car_name}}">
-                <h3>{{car.car_name}}</h3>
-                <div class="price">From ksh<span> {{car.price}}</span> per day</div>
-                {% if car.is_available == True %}
-                    {% if user.is_authenticated %}
-                    <a class="btn" href="{% url 'book_car' car.id %}">Book Now</a>
+                <div class="image-container">
+                    <img src="{{car.car_image.url}}" alt="{{car.car_name}}">
+                </div>
+                <div class="desc">
+                    <h3>{{car.car_name}}</h3>
+                    <div class="price">From ksh<span> {{car.price}}</span> per day</div>
+                    {% if car.is_available == True %}
+                        {% if user.is_authenticated %}
+                        <a class="btn" href="{% url 'book_car' car.id %}">Book Now</a>
+                        {% else %}
+                        <a class="btn" href="#hire_a_car">Book Now</a>
+                        {% endif %}
                     {% else %}
-                    <a class="btn" href="#hire_a_car">Book Now</a>
+                        <button class="btn" onclick="openModal()">Hire now</button>
                     {% endif %}
-                {% else %}
-                    <button class="btn" onclick="openModal()">Hire now</button>
-                {% endif %}
+            </div>
             </div>
             {% endfor %} 
             <div id="carModal" class="modal">
