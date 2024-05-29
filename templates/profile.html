@@ -1,7 +1,65 @@
 {% extends "base.html" %} 
 {% block main_content %}
+<head>
+  <style>
+    form{
+      margin: 2rem auto;
+      max-width: 450px;
+    }
+    .form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.card {
+    margin-top: 50px;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+}
+
+.alert {
+    margin-top: 10px;
+}
+
+  </style>
+</head>
 <br>
 <br><br><br>
+<h3>Hey {{user.username}}</h3>
+<p>Update your profile below</p>
       <!-- form start -->
 <form action="/profile_save" method="POST" enctype="multipart/form-data">
     {% csrf_token %}

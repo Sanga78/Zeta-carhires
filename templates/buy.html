@@ -50,6 +50,24 @@
             background-color: rgb(7, 82, 156);
             border: 1px solid rgb(8, 94, 180);
         }
+         .image-container {
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 1rem;
+}
+ .image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+ .box:hover .image-container img {
+  transform: scale(1.1);
+}
+a:hover{
+    text-decoration: none;
+}
     </style>
 </head>
 <body>
@@ -66,38 +84,44 @@
     </div>
 
     <div class="container mt-5" id="cars">
-        <h2 class="text-center mb-5">Our Available Cars</h2>
+        <h2 class="text-center mb-5">Available Cars</h2>
         <div class="row">
             {% for car in cars%}
             <div class="col-md-4 car-card">
                 <div class="card">
-                    <img src="{{car.main_image.url}}" class="card-img-top" alt="{{car.model}}">
+                    <div class="image-container">
+                        <img src="{{car.main_image.url}}" class="card-img-top" alt="{{car.model}}">
+                    </div>
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ car.model }}</h5>
                         <p class="card-text">$ {{car.price}}</p>
                         <a href="#" class="btn btn-outline-secondary mb-2">View Details</a>
-                        <a href="#" class="btn btn-danger">Book Now</a>
+                        <a href="#" class="btn btn-danger">Order Now</a>
                     </div>
                 </div>
             </div>
             {% endfor %}
             <div class="col-md-4 car-card">
                 <div class="card">
-                    <img src="static/images/allion.jpg" class="card-img-top" alt="Mercedes E-Class">
+                    <div class="image-container">
+                    <img src="static/images/allion.jpg" class="card-img-top" alt="Mercedes E-Class"></div>
                     <div class="card-body text-center">
                         <h5 class="card-title">Mercedes E-Class</h5>
+                        <p class="card-text">$ 50000</p>
                         <a href="#" class="btn btn-outline-secondary mb-2">View Details</a>
-                        <a href="#" class="btn btn-danger">Book Now</a>
+                        <a href="#" class="btn btn-danger">Order Now</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 car-card">
                 <div class="card">
-                    <img src="static/images/allion.jpg" class="card-img-top" alt="Benz B Class">
+                    <div class="image-container">
+                    <img src="static/images/allion.jpg" class="card-img-top" alt="Benz B Class"></div>
                     <div class="card-body text-center">
                         <h5 class="card-title">Benz B Class</h5>
+                        <p class="card-text">$ 45000</p>
                         <a href="#" class="btn btn-outline-secondary mb-2">View Details</a>
-                        <a href="#" class="btn btn-danger">Book Now</a>
+                        <a href="#" class="btn btn-danger">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -106,31 +130,37 @@
         <div class="row">
             <div class="col-md-4 car-card">
                 <div class="card">
-                    <img src="static/images/allion.jpg" class="card-img-top" alt="Car Model 1">
+                    <div class="image-container">
+                    <img src="static/images/allion.jpg" class="card-img-top" alt="Car Model 1"></div>
                     <div class="card-body text-center">
                         <h5 class="card-title">Car Model 1</h5>
+                        <p class="card-text">$ 35000</p>
                         <a href="#" class="btn btn-outline-secondary mb-2">View Details</a>
-                        <a href="#" class="btn btn-danger">Book Now</a>
+                        <a href="#" class="btn btn-danger">Order Now</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 car-card">
                 <div class="card">
-                    <img src="static/images/allion.jpg" class="card-img-top" alt="Car Model 2">
+                    <div class="image-container">
+                    <img src="static/images/allion.jpg" class="card-img-top" alt="Car Model 2"></div>
                     <div class="card-body text-center">
                         <h5 class="card-title">Car Model 2</h5>
+                        <p class="card-text">$ 30000</p>
                         <a href="#" class="btn btn-outline-secondary mb-2">View Details</a>
-                        <a href="#" class="btn btn-danger">Book Now</a>
+                        <a href="#" class="btn btn-danger">Order Now</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 car-card">
                 <div class="card">
-                    <img src="static/images/allion.jpg" class="card-img-top" alt="Car Model 3">
+                    <div class="image-container">
+                    <img src="static/images/allion.jpg" class="card-img-top" alt="Car Model 3"></div>
                     <div class="card-body text-center">
                         <h5 class="card-title">Car Model 3</h5>
+                        <p class="card-text">$ 25000</p>
                         <a href="#" class="btn btn-outline-secondary mb-2">View Details</a>
-                        <a href="#" class="btn btn-danger">Book Now</a>
+                        <a href="#" class="btn btn-danger">Order Now</a>
                     </div>
                 </div>
             </div>

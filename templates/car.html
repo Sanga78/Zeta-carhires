@@ -6,9 +6,10 @@
 </head>
 {% block main_content %}
 <head>
-    <!-- fontawesome cdn link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" crossorigin="anonymous" />
     <style>
+        body{
+            font-weight: 100;
+        }
         #phoneNumber{
             display: none; 
             margin: auto;
@@ -66,7 +67,7 @@
                     {% else %}
                         <button class="btn" onclick="openModal()">Hire now</button>
                     {% endif %}
-            </div>
+                </div>
             </div>
             {% endfor %} 
             <div id="carModal" class="modal">

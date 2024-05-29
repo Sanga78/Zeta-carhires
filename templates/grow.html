@@ -1,5 +1,83 @@
 {% extends "base.html" %}
 {% block main_content %}
+{% load static %}
+<head>
+    <style>
+        /* Hero section */
+.hero {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+}
+
+.hero .container {
+    max-width: 1200px;
+}
+
+.hero .title {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Quote section */
+.quote {
+    background-color: #333;
+    color: #fff;
+    padding: 50px 0;
+}
+
+.quote p {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.quote .details {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.quote .image {
+    margin-right: 20px;
+}
+
+.quote .image img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.quote h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero .col-lg-2 {
+        flex-basis: 50%;
+        max-width: 50%;
+        text-align: center;
+    }
+
+    .quote .details {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .quote .image {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .quote h2 {
+        font-size: 20px;
+    }
+}
+
+    </style>
+</head>
 <body class="grow">
     <section class="home">
         <div class="description">
@@ -28,43 +106,45 @@
         </div>
     </section>
     <section class="hero flex-column justify-content-center align-items-center">
-       <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-2">
-                <div class="img">
-                    <a href="" class="bi bi-bookmark" aria-hidden="true "></a>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-2">
+                    <div class="img">
+                        <a href="" class="bi bi-bookmark" aria-hidden="true"></a>
+                    </div>
+                    <div class="title">Save time</div>
                 </div>
-                <div class="title">Save time</div>
-            </div>
-            <div class="col-lg-2">
-                <div class="img">
-                    <a href="" class="bi bi-bookmark" aria-hidden="true "></a>
+                <div class="col-lg-2">
+                    <div class="img">
+                        <a href="" class="bi bi-bookmark" aria-hidden="true"></a>
+                    </div>
+                    <div class="title">Earn more</div>
                 </div>
-                <div class="title">earn more</div>
-            </div>
-            <div class="col-lg-2">
-                <div class="img">
-                    <a href="" class="bi bi-bookmark" aria-hidden="true "></a>
+                <div class="col-lg-2">
+                    <div class="img">
+                        <a href="" class="bi bi-bookmark" aria-hidden="true"></a>
+                    </div>
+                    <div class="title">Grow faster</div>
                 </div>
-                <div class="title">Grow faster</div>
-            </div>
-            <div class="col-lg-2">
-                <div class="img">
-                    <a href="" class="bi bi-bookmark" aria-hidden="true "></a>
+                <div class="col-lg-2">
+                    <div class="img">
+                        <a href="" class="bi bi-bookmark" aria-hidden="true"></a>
+                    </div>
+                    <div class="title">Friendly support</div>
                 </div>
-                <div class="title">friendly support</div>
             </div>
         </div>
-       </div>
     </section>
+    
     <section class="quote">
         <div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad, eligendi magni ipsa, neque possimus mollitia et veritatis magnam, excepturi tempora accusantium. Expedita veritatis inventore excepturi, minus doloribus a quas eum?</p>
+            <p>"Our mission is to save you time, help you earn more, and support your growth. Welcome to Zeta Car Hires."</p>
             <div class="details">
-                <div class="image"><img src="../images/person_1.jpg" alt=""></div>
-                <h2>Noel Kipkoech</br>CEO zeta car hires</h2>
+                <div class="image"><img src="{% static 'images/person_1.jpg' %}" alt=""></div>
+                <h2>Noel Kipkoech</br>CEO, Zeta Car Hires</h2>
             </div>
         </div>
     </section>
+    
   </body>  
 {% endblock main_content%}

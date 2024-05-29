@@ -359,61 +359,66 @@ color: var(--white);
 
 .menu .box-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-  place-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 2rem;
+  background: #f4f4f4;
 }
-
-.menu .box-container .box {
-  max-width: 350px;
-  display: flex;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+.menu .box {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.menu .box:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.menu .image-container {
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 1rem;
+}
+.menu .image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.menu .box:hover .image-container img {
+  transform: scale(1.1);
+}
+.menu .desc {
   text-align: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
 }
-
-.menu .box-container .box .image-container {
-  flex: 60;
+.menu .desc h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.menu .price {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+.menu .btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--main-color);
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+.menu .btn:hover {
+  background: #555;
 }
 .menu .box-container .box .desc{
   flex: 40;
 }
-.menu .box-container .box .image-container img{
-  object-fit: cover;
-  width: 100%;
-}
-.menu .box-container .box img:hover{
-  transform: scale(1.05);
-  border-radius: .5rem;
-}
-.menu .box-container .box h3 {
-  text-align: center;
-  color: var(--black);
-  font-size: 2rem;
-  padding: 1rem 0;
-}
 
-.menu .box-container .box .price {
-  text-align: center;
-  color: var(--black);
-  font-size: 2.5rem;
-  padding: .5rem 0;
-}
-.menu .box-container .box button{
-width: 85%;
-margin: 1em auto;
-min-width: 20vw;
-}
-.menu .box-container .box button:hover{
-  background-color:rgba(8, 94, 180,0.75);
-}
-.menu .box-container .box .price span {
-  font-size: 2.5rem;
-  color: var(--main-color);
-}
 
 .review .box-container {
   display: grid;
