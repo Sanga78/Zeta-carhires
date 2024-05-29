@@ -1173,31 +1173,6 @@ animation: revealNextWord 6s cubic-bezier(0.57, 1.52, 0.9, 1.08) 4.5s infinite;
 }
 
 }
-/*.carousel {
-  margin-top: 2%;
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  height: 90vh;
-  width: 100vw;
-}
- .carousel-image {
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-} */
-
-/* .centered-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgb(0, 60, 255);
-  font-size: 5rem;
-  text-shadow: 2px 2px 4px rgba(255,255,255,0.6);
-} */
-
 
 .test {
   overflow-x: hidden;

@@ -69,7 +69,8 @@ def hire_request(request):
             return HttpResponseRedirect(reverse("car"))
 
 def buy(request):
-    return render(request,'buy.html')
+    cars = Car.objects.all()
+    return render(request,'buy.html', {'cars': cars})
 
 def tour_request(request):
     if request.method!="POST":

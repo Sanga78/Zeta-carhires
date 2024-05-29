@@ -63,39 +63,18 @@ class Booking(models.Model):
     def __str__(self):
         return f"{self.customer_name} - {self.car.car_name}"
 
-# class Booking(models.Model):
-#     customer = models.ForeignKey(Customer,on_delete= models.SET_NULL,null=True, blank=True)
-#     date_ordered = models.DateTimeField(auto_now_add=True)
-#     complete = models.BooleanField(default=False,null=True, blank=False)
-#     transaction_id = models.CharField(max_length=200, null=True)
-#     objects = models.Manager()
 
-#     def __str__(self):
-#         return str(self.id)
-    
-# class OrderItem(models.Model):
-#     vehicle = models.ForeignKey(Vehicle,on_delete= models.SET_NULL,null=True, blank=True)
-#     order = models.ForeignKey(Order,on_delete= models.SET_NULL,null=True, blank=True)
-#     days = models.IntegerField(default=0,null=True,blank=False)
-#     date_added = models.DateTimeField(auto_now_add=True)
-#     objects = models.Manager()
+class Car(models.Model):
+    model = models.CharField(max_length=100)
+    price = models.CharField(max_length=20)
+    description = models.TextField()
+    colors = models.CharField(max_length=100)
+    seats = models.IntegerField()
+    main_image = models.ImageField(upload_to='cars/')
+    additional_images = models.ManyToManyField('CarImage')
 
-#     @property
-#     def get_total(self):
-#         total = self.vehicle.price * self.days
-#         return total    
-    
-# class RentAddress(models.Model):
-#     customer = models.ForeignKey(Customer,on_delete= models.SET_NULL,null=True, blank=True)
-#     order = models.ForeignKey(Order,on_delete= models.SET_NULL,null=True, blank=True)
-#     address = models.CharField(max_length=200,null=True)
-#     city = models.CharField(max_length=200,null=True)
-#     zipcode = models.CharField(max_length=200,null=True)
-#     date_added = models.DateTimeField(auto_now_add=True)
-#     objects = models.Manager()
-
-#     def __str__(self):
-#         return self.address 
+class CarImage(models.Model):
+    image = models.ImageField(upload_to='car_images/')
 
 class Hire_Request(models.Model):
     full_name = models.CharField(max_length=200)
