@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block main_content %}
+{% load static %}
+<br>
+<br>
+<br>
+<br>
+<head>
+    <style>
+        .booking-history-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.booking-history-container h1 {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.no-booking {
+    font-style: italic;
+    color: #888;
+}
+
+.returned {
+    color: green;
+}
+
+.on-rent {
+    color: red;
+}
+
+
+    </style>
+</head>
+
+<div class="booking-history-container">
+    <h1>Booking History</h1>
+    {% if bookings %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Car Name</th>
+                    <th>Booking Date</th>
+                    <th>Return Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.car.car_name }}</td>
+                    <td>{{ booking.booking_date }}</td>
+                    <td>{{ booking.return_date }}</td>
+                    <td class="{% if booking.return_date %}returned{% else %}on-rent{% endif %}">
+                        {% if booking.return_date %}
+                            Returned
+                        {% else %}
+                            On Rent
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-booking">You don't have any booking history. Book a car from us now!</p>
+    {% endif %}
+</div>
+{% endblock main_content %}

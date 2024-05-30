@@ -193,3 +193,12 @@ def profile_save(request):
     
     customer = get_object_or_404(Customer, admin=customer_id)
     return render(request, "profile.html", {"form": form, "id": customer_id, "username": customer.admin.username})
+
+def booked_cars_list(request):
+    user = request.user
+    if user.is_authenticated:
+        bookings = Booking.objects.filter(customer_name__admin=user)
+        return render(request, 'my_bookings.html', {'bookings': bookings})
+    else:
+        messages.error(request,"Make sure you are registered")
+        return HttpResponseRedirect(reverse("index"))

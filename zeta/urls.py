@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from car_rental import views,AdminViews,Customerviews
+from django.contrib.auth import views as auth_views
 from django.conf import settings
 
 urlpatterns = [  
     path('admin/', admin.site.urls),
     path('',views.index, name="home"),
+    path('accounts/', include('allauth.urls')), # all OAuth operations will be performed under this route
     path('index',views.index, name="index"),
     path('admin_home',AdminViews.admin_home,name="admin_home"),
     path('customer_home',Customerviews.customer_home,name="customer_home"),
@@ -59,4 +61,22 @@ urlpatterns = [
     path('return/<int:booking_id>/', AdminViews.return_car, name='return_car'),    
     path('update_profile/<str:customer_id>',Customerviews.update_profile,name="update_profile"),
     path('profile_save',Customerviews.profile_save,name="profile_save"),
+    path('booked_cars/', Customerviews.booked_cars_list, name='booked_cars_list'),
+    path('password-reset/', 
+        auth_views.PasswordResetView.as_view(
+        template_name='users/password_reset.html',
+        html_email_template_name='users/password_reset_email.html'
+    ),
+    name='password_reset'
+    ),
+    path('password-reset/done/', 
+         auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), 
+         name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/', 
+         auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), 
+         name='password_reset_confirm'),
+    path('password-reset-complete/', 
+         auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), 
+         name='password_reset_complete')
+
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

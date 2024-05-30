@@ -1,17 +1,34 @@
-{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Book Car</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hi {{user.username}}</h1>
-    <h2>Do you want to book {{car.car_name}} at ksh<strong>{{car.price}}</strong></h2>
-    <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="customer_id" value="{{ user.id }}">
-        <button type="submit">Book</button>
-    </form>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">Hi {{user.username}}</h1>
+                <h2 class="card-subtitle mb-2 text-muted">Do you want to book {{car.car_name}} at ksh<strong>{{car.price}}</strong>?</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="customer_id" value="{{ user.id }}">
+                    <button type="submit" class="btn btn-primary">Book</button>
+                    <a href="{% url 'index' %}" class="btn btn-secondary">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
