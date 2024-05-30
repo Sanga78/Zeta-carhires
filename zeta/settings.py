@@ -132,3 +132,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "car_rental.CustomUser"
 AUTHENTICATION_BACKEND=["car_rental.EmailBackEnd.EmailBackEnd"]
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'          # SMTP server address
+EMAIL_PORT = 587                       # Port for TLS
+EMAIL_USE_TLS = True                   # Use TLS for secure connection
+EMAIL_HOST_USER = 'sangakelvin026@gmail.com'   # Your Gmail email address
+EMAIL_HOST_PASSWORD = 'gvtv knhf fdsk gguj'      # Your Gmail email password
+DEFAULT_FROM_EMAIL = 'sangakelvin026@gmail.com' # Default sender email address

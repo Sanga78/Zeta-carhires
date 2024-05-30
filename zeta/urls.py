@@ -24,7 +24,7 @@ from django.conf import settings
 urlpatterns = [  
     path('admin/', admin.site.urls),
     path('',views.index, name="home"),
-    path('accounts/', include('allauth.urls')), # all OAuth operations will be performed under this route
+    path('accounts/', include('django.contrib.auth.urls')),  # Include auth URLs
     path('index',views.index, name="index"),
     path('admin_home',AdminViews.admin_home,name="admin_home"),
     path('customer_home',Customerviews.customer_home,name="customer_home"),
