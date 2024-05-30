@@ -5,7 +5,9 @@ from .models import *
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
 from .forms import UpdateProfileForm
-
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 # Create your views here.
 def earn(request):
     return render(request,'earn.html')
@@ -125,10 +127,21 @@ def book_car(request, car_id):
     if car.is_available:
         if request.method == 'POST':
             customer_id = request.POST.get('customer_id')
-            customer_name = Customer.objects.get(admin=customer_id)
-            Booking.objects.create(car=car, customer_name=customer_name)
+            customer = get_object_or_404(Customer, admin=customer_id)
+            Booking.objects.create(car=car, customer_name=customer)
             car.is_available = False
             car.save()
+
+            # Send booking confirmation email
+            subject = 'Booking Confirmation'
+            booking_link = request.build_absolute_uri(reverse('my_bookings'))
+            html_message = render_to_string('emails/booking_confirmation.html', {'customer_name': customer.admin.username, 'car_name': car.name, 'booking_link': booking_link})
+            plain_message = strip_tags(html_message)
+            from_email = 'your-email@gmail.com'
+            to = customer.admin.email
+
+            send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
             return redirect('car')
         return render(request, 'book_car.html', {'car': car})
     else:
@@ -149,11 +162,11 @@ def update_profile(request, customer_id):
 def profile_save(request):
     if request.method != "POST":
         return HttpResponse("<h2>Method Not Allowed</h2>")
-    
+
     customer_id = request.session.get("customer_id")
     if not customer_id:
         return HttpResponseRedirect(reverse("update_profile", kwargs={"customer_id": customer_id}))
-    
+
     form = UpdateProfileForm(request.POST, request.FILES)
     if form.is_valid():
         first_name = form.cleaned_data["first_name"]
@@ -161,14 +174,14 @@ def profile_save(request):
         username = form.cleaned_data["username"]
         email = form.cleaned_data["email"]
         address = form.cleaned_data["address"]
-        
+
         profile_pic_url = None
         if 'profile_pic' in request.FILES:
             profile_pic = request.FILES['profile_pic']
             fs = FileSystemStorage()
             filename = fs.save(profile_pic.name, profile_pic)
             profile_pic_url = fs.url(filename)
-        
+
         try:
             user = CustomUser.objects.get(id=customer_id)
             user.first_name = first_name
@@ -183,6 +196,15 @@ def profile_save(request):
                 customer.profile_pic = profile_pic_url
             customer.save()
 
+            # Send profile update notification email
+            subject = 'Profile Updated'
+            html_message = render_to_string('emails/profile_update_notification.html', {'customer_name': customer.admin.username})
+            plain_message = strip_tags(html_message)
+            from_email = 'your-email@gmail.com'
+            to = customer.admin.email
+
+            send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
             del request.session['customer_id']
             messages.success(request, "Successfully Updated Profile")
             return HttpResponseRedirect(reverse("index"))  # Redirect to the index page after successful update
@@ -190,10 +212,9 @@ def profile_save(request):
             messages.error(request, "Failed to Update Profile: User not found")
         except Exception as e:
             messages.error(request, f"Failed to Update Profile: {str(e)}")
-    
+
     customer = get_object_or_404(Customer, admin=customer_id)
     return render(request, "profile.html", {"form": form, "id": customer_id, "username": customer.admin.username})
-
 def booked_cars_list(request):
     user = request.user
     if user.is_authenticated:
