@@ -134,8 +134,8 @@ def book_car(request, car_id):
 
             # Send booking confirmation email
             subject = 'Booking Confirmation'
-            booking_link = request.build_absolute_uri(reverse('my_bookings'))
-            html_message = render_to_string('emails/booking_confirmation.html', {'customer_name': customer.admin.username, 'car_name': car.name, 'booking_link': booking_link})
+            booking_link = request.build_absolute_uri(reverse('booked_cars_list'))
+            html_message = render_to_string('emails/booking_confirmation.html', {'customer_name': customer.admin.username, 'car_name': car.car_name, 'booking_link': booking_link})
             plain_message = strip_tags(html_message)
             from_email = 'your-email@gmail.com'
             to = customer.admin.email
