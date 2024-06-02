@@ -1,10 +1,13 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
-from .forms import AddCustomerForm,EditCustomerForm
+from .forms import AddCustomerForm,EditCustomerForm,CarForm, CarImageForm
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 def admin_home(request):
     return render(request, "Admin_templates/home.html")
@@ -180,10 +183,32 @@ def tour_requests(request):
 
 def return_car(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
-    booking.return_date = timezone.now()
-    booking.car.is_available = True
-    booking.car.save()
+    return_date = timezone.now()
+    booking.return_date = return_date
+    # Calculate total cost
+    days_booked = (return_date - booking.booking_date).days
+    total_cost = days_booked * booking.car.price
+    booking.total_cost = total_cost
+    car = booking.car
+    car.is_available = True
+    car.save()
     booking.save()
+    # Send billing email
+    subject = 'Zeta CarHires Billing Details'
+    html_message = render_to_string('emails/billing_details.html', {
+        'customer_name': booking.customer_name.admin.username,
+        'car_name': car.car_name,
+        'total_cost': total_cost,
+        'days_booked': days_booked,
+        'booking_date': booking.booking_date,
+        'return_date': return_date,
+    })
+    plain_message = strip_tags(html_message)
+    from_email = 'zetacarhires@gmail.com'
+    to = booking.customer_name.admin.email
+
+    send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
     return HttpResponseRedirect(reverse("bookings"))
 
 def new_fleet(request):
@@ -191,5 +216,21 @@ def new_fleet(request):
     return render(request,"Admin_templates/fleet.html",{"fleets":fleets})
 
 def bookings(request):
-    bookings = Booking.objects.all()
-    return render(request,"Admin_templates/bookings.html",{"bookings":bookings})
+    cars = Car.objects.all()
+    return render(request,"Admin_templates/bookings.html",{"cars":cars})
+
+def add_car(request):
+    if request.method == 'POST':
+        car_form = CarForm(request.POST, request.FILES)
+        if car_form.is_valid():
+            car = car_form.save()
+            messages.success(request, 'Car added successfully!')
+            return redirect('car_list')
+        else:
+            messages.error(request, 'Error adding car. Please correct the errors below.')
+    else:
+        car_form = CarForm()
+    return render(request, 'Admin_templates/add_car_for_sale.html', {'car_form': car_form})
+def car_list(request):
+    cars = Car.objects.all()
+    return render(request, 'Admin_templates/car_list.html', {'cars': cars})

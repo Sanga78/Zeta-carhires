@@ -59,10 +59,13 @@ class Booking(models.Model):
     customer_name = models.ForeignKey(Customer,on_delete= models.SET_NULL,null=True, blank=True)
     booking_date = models.DateTimeField(default=timezone.now)
     return_date = models.DateTimeField(null=True, blank=True)
-
+    total_cost = models.FloatField()
     def __str__(self):
         return f"{self.customer_name} - {self.car.car_name}"
 
+
+class CarImage(models.Model):
+    image = models.ImageField(upload_to='car_images/')
 
 class Car(models.Model):
     model = models.CharField(max_length=100)
@@ -71,11 +74,8 @@ class Car(models.Model):
     colors = models.CharField(max_length=100)
     seats = models.IntegerField()
     main_image = models.ImageField(upload_to='cars/')
-    additional_images = models.ManyToManyField('CarImage')
-
-class CarImage(models.Model):
-    image = models.ImageField(upload_to='car_images/')
-
+    additional_images = models.ManyToManyField(CarImage, related_name='cars')
+       
 class Hire_Request(models.Model):
     full_name = models.CharField(max_length=200)
     destination = models.CharField(max_length=200)

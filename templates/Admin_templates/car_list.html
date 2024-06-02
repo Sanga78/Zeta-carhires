@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car List</title>
+</head>
+<body>
+    <h1>Car List</h1>
+    <ul>
+        {% for car in cars %}
+        <li>
+            <h2>{{ car.model }}</h2>
+            <p>Price: {{ car.price }}</p>
+            <p>Description: {{ car.description }}</p>
+            <p>Colors: {{ car.colors }}</p>
+            <p>Seats: {{ car.seats }}</p>
+            <img src="{{ car.main_image.url }}" alt="{{ car.model }} main image" style="max-width: 200px;">
+            <h3>Additional Images:</h3>
+            <ul>
+                {% for image in car.additional_images.all %}
+                <li><img src="{{ image.image.url }}" alt="{{ car.model }} additional image" style="max-width: 200px;"></li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

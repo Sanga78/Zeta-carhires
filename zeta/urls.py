@@ -41,6 +41,7 @@ urlpatterns = [
     path('edit_customer/<str:customer_id>',AdminViews.edit_customer,name="edit_customer"),
     path('edit_customer_save',AdminViews.edit_customer_save,name="edit_customer_save"),
     path('manage_customer',AdminViews.manage_customer,name="manage_customer"),
+    path('add_car', AdminViews.add_car, name='add_car'),
     path('register',views.register,name="register"),
     path('loginpage',views.loginPage,name="show_login"),
     path('login',views.Login,name="do_login"),
@@ -77,6 +78,6 @@ urlpatterns = [
          name='password_reset_confirm'),
     path('password-reset-complete/', 
          auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), 
-         name='password_reset_complete')
-
+         name='password_reset_complete'),
+    path('car_list', AdminViews.car_list, name='car_list'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

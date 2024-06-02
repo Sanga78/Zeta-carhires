@@ -26,7 +26,7 @@
           
           <li class="nav-item">
             {% url 'add_vehicle' as add_vehicle %}
-            <a href="{{ 'add_vehicle' }}" class="nav-link {% if request.path == add_vehicle %} active {% endif %}">
+            <a href="{{ '/add_vehicle' }}" class="nav-link {% if request.path == add_vehicle %} active {% endif %}">
               <i class="nav-icon fas fa-car"></i>
               <p>
                 Add Car
@@ -36,7 +36,7 @@
           <li class="nav-item">
             {% url 'manage_vehicle' as manage_vehicle %}
             {% url 'edit_vehicle' vehicle_id=id as edit_vehicle %}
-            <a href="{{ 'manage_vehicle' }}" class="nav-link {% if request.path == manage_vehicle %} active {% endif %}{% if request.path == edit_vehicle %} active {% endif %}">
+            <a href="{{ '/manage_vehicle' }}" class="nav-link {% if request.path == manage_vehicle %} active {% endif %}{% if request.path == edit_vehicle %} active {% endif %}">
               <i class="nav-icon fas fa-taxi"></i>
               <p>
                 Manage Cars
@@ -46,7 +46,7 @@
           <li class="nav-item">
             {% url 'bookings' as bookings %}
             {% url 'return_car' booking_id=id as return_car %}
-            <a href="{{ 'bookings' }}" class="nav-link {% if request.path == bookings %} active {% endif %}{% if request.path == return_car %} active {% endif %}">
+            <a href="{{ '/bookings' }}" class="nav-link {% if request.path == bookings %} active {% endif %}{% if request.path == return_car %} active {% endif %}">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Bookings
@@ -55,7 +55,7 @@
           </li>
           <li class="nav-item">
             {% url 'new_fleet' as new_fleet %}
-            <a href="{{ 'new_fleet' }}" class="nav-link {% if request.path == new_fleet %} active {% endif %}">
+            <a href="{{ '/new_fleet' }}" class="nav-link {% if request.path == new_fleet %} active {% endif %}">
               <i class="nav-icon fas fa-plus"></i>
               <p>
                 New Fleet
@@ -64,7 +64,7 @@
           </li>
           <li class="nav-item">
             {% url 'add_customer' as add_customer %}
-            <a href="{{ 'add_customer' }}" class="nav-link {% if request.path == add_customer %} active {% endif %}">
+            <a href="{{ '/add_customer' }}" class="nav-link {% if request.path == add_customer %} active {% endif %}">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Add Customer
@@ -74,10 +74,28 @@
           <li class="nav-item">
             {% url 'manage_customer' as manage_customer %}
             {% url 'edit_customer' customer_id=id as edit_customer %}
-            <a href="{{ 'manage_customer' }}" class="nav-link {% if request.path == manage_customer %} active {% endif %}{% if request.path == edit_customer %} active {% endif %}">
+            <a href="{{ '/manage_customer' }}" class="nav-link {% if request.path == manage_customer %} active {% endif %}{% if request.path == edit_customer %} active {% endif %}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Manage Customers
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'add_car' as add_car %}
+            <a href="{{ '/add_car' }}" class="nav-link {% if request.path == add_car %} active {% endif %}">
+              <i class="nav-icon fas fa-car"></i>
+              <p>
+                Add Car For Sale
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'car_list' as car_list %}
+            <a href="{{ '/car_list' }}" class="nav-link {% if request.path == car_list %} active {% endif %}">
+              <i class="nav-icon fas fa-car"></i>
+              <p>
+                Cars On Sale
               </p>
             </a>
           </li>
@@ -113,6 +131,8 @@
               </li>
             </ul>
           </li>
+
+        </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
