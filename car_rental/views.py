@@ -28,7 +28,7 @@ def register(request):
                 try:
                     user=CustomUser.objects.create_user(username=username,password=password,email=email,last_name=last_name,first_name=first_name,user_type=2)
                     user.save()
-                    messages.success(request,"Registration Successfull!")
+                    messages.success(request,f"Account Successfully created:{user.username}")
                     return HttpResponseRedirect(reverse("show_login"))
                 except:
                     messages.error(request,"Failed to Add Customer")

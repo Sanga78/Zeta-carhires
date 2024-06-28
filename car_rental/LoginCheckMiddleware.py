@@ -8,14 +8,14 @@ class LoginCheckMiddleware(MiddlewareMixin):
         user = request.user
         if user.is_authenticated:
             if user.user_type == "1":
-                if modulename ==  "car_rantal.AdminViews":
+                if modulename ==  "car_rental.AdminViews":
                     pass
                 elif modulename == "car_rental.views" or modulename== "django.views.static":
                     pass
                 else:
                     return HttpResponseRedirect(reverse("admin_home"))
             elif user.user_type == "2":
-                if modulename ==  "car_rantal.CustomerViews":
+                if modulename ==  "car_rental.Customerviews":
                     pass
                 elif modulename == "car_rental.views" or modulename== "django.views.static":
                     pass
@@ -24,7 +24,7 @@ class LoginCheckMiddleware(MiddlewareMixin):
             else:
                 return HttpResponseRedirect(reverse("show_login"))
         else:
-            if request.path == reverse("show_login") or request.path == reverse("do_login"):
+            if request.path == reverse("show_login") or request.path == reverse("do_login") or modulename == "car_rental.views":
                 pass
             else:
                 return HttpResponseRedirect(reverse("index"))
