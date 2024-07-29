@@ -10,7 +10,29 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 def admin_home(request):
-    return render(request, "Admin_templates/home.html")
+    car_count=Vehicle.objects.all().count()
+    hire_requests_count=Hire_Request.objects.all().count()
+    car_for_sale_count=Car.objects.all().count()
+    bookings_count=Booking.objects.all().count()
+    customers_count=Customer.objects.all().count()
+
+    cars_all=Vehicle.objects.all()
+
+    cars_available=[]
+    cars_booked=[]
+    car_name_list=[]
+    for car in cars_all:
+        car_name_list.append(car.car_name)
+        if car.is_available:
+            available=Vehicle.objects.filter(id=car.id).count()
+            cars_available.append(available)
+        else:
+            booked=Vehicle.objects.filter(id=car.id).count()
+            cars_booked.append(booked)                   
+    cars_av = len(cars_available)
+    booked_cars = len(cars_booked)
+    context = {"car_count":car_count,"hire_requests_count":hire_requests_count,"car_for_sale_count":car_for_sale_count,"bookings_count":bookings_count,"customers_counts":customers_count,"booked":cars_booked,"available":cars_available,"car_name_list":car_name_list,"cars_av":cars_av,"booked_cars":booked_cars}
+    return render(request, "Admin_templates/home.html",context)
 
 def add_vehicle(request):
     return render(request, 'Admin_templates/add_vehicle.html')
