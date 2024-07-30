@@ -8,6 +8,7 @@ from .forms import UpdateProfileForm
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 # def rent_vehicle(request):
@@ -41,6 +42,7 @@ from django.utils.html import strip_tags
 def customer_home(request):
     return render(request,'index.html')
 
+@login_required
 def book_car(request, car_id):
     car = get_object_or_404(Vehicle, id=car_id)
     if car.is_available:
