@@ -89,7 +89,7 @@
                 <form action="/list_fleet" method="post" class="delay-neg-500">
                     {% csrf_token %}
                     <h3 style="color: rgb(8, 94, 180);">Book a call with us</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, quam.</p>
+                    <p>Want to grow with us,fill the form below </p>
                     {% if user.is_authenticated %}
                     <div class="form-group mt-3"><input type="text" class="form-control" id="personal_name" name="personal_name" placeholder="Personal Name" value="{{ user.first_name }} {{ user.last_name }}" required></div>
                     <div class="form-group mt-3"><input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ user.email }}" required></div>
