@@ -31,7 +31,7 @@
         }
     </style>
 </head>
-<body class="hire">
+<main class="hire">
     <!-- header section starts here -->
     <!-- header section ends here -->
 
@@ -62,7 +62,7 @@
                         {% if user.is_authenticated %}
                         <a class="btn" href="{% url 'book_car' car.id %}">Book Now</a>
                         {% else %}
-                        <a class="btn" href="#hire_a_car">Book Now</a>
+                        <a class="btn" href="{% url 'show_login' %}">Book Now</a>
                         {% endif %}
                     {% else %}
                         <button class="btn" onclick="openModal()">Hire now</button>
@@ -174,5 +174,6 @@
     </section>
     <!-- review section ends here -->
     <!-- footer section starts here -->
+</main>
 
   {% endblock main_content%}

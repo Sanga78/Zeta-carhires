@@ -28,23 +28,31 @@
                     <li><a href="{% url 'earn' %}" class="{% if request.path == earn %} active {% endif %}">Earn</a></li>
                     <li><a href="{% url 'grow' %}" class="{% if request.path == grow %} active {% endif %}">Grow</a></li>
                     <li><a href="{% url 'buy' %}" class="{% if request.path == buy %} active {% endif %}">Buy a car</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'update_profile' user.id %}" class="{% if request.path == update_profile %} active {% endif %}">Profile</a></li>
-						<li><a href="{% url 'booked_cars_list' %}" class="{% if request.path == booked_cars_list %} active {% endif %}">Bookings</a></li>
-                        <li><a href="{% url 'logout' %}" class="{% if request.path == logout %} active {% endif %}" style="color:red">Logout</a></li>
-                    {% else %}
-					    <li><a href="{% url 'about' %}" class="{% if request.path == about %} active {% endif %}">About Us</a></li>
-                        <li><a href="{% url 'show_login' %}" class="{% if request.path == show_login %} active {% endif %}" style="color:blue">Login</a></li>
-                    {% endif %}
                 </ul>
-            </nav>
-            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+           </nav>
+           <div style="display: flex; align-items: center;">
+            <div class="dropdown">
+                    <button class="dropbtn">
+                        <img src="{% static 'images/account.png' %}" alt="Account" class="nav-icon" id="account-icon">
+                    </button>
+                    <div class="dropdown-content" id="dropdown-content">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'update_profile' user.id %}">My Profile</a>
+                            <a href="{% url 'booked_cars_list' %}">Bookings</a>
+                            <a href="{{ 'logout' }}" style="color:red">Logout</a>
+                        {% else %}
+                            <a href="{% url 'show_login' %}" class="{% if request.path == show_login %} active {% endif %}" style="color:blue">Login</a>
+                            <a href="{{ 'register' }}">Sign Up</a>
+                        {% endif %}                       
+                    </div>
+                </div>
+                <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+                <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main>
         {% if messages %}
             {% for message in messages %}
                 {% if message.tags == 'error' %}
@@ -63,7 +71,6 @@
             {% endfor %}
         {% endif %}
         {% block main_content %}{% endblock main_content %}
-    </main>
 
     <!-- Footer Section -->
     <footer>
@@ -112,5 +119,17 @@
     <div class="credit">Zeta <span>carhires</span> | all rights reserved</div>
 
     <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        var account_icon = document.getElementById("account-icon");
+        var dropdown_content = document.getElementById("dropdown-content");
+        account_icon.addEventListener('click',function () {
+            dropdown_content.style.display = "block";
+        });
+
+        window.onscroll = function(event) {
+                dropdown_content.style.display = "none";
+        }
+
+    </script>
 </body>
 </html>

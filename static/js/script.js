@@ -155,7 +155,7 @@ const handleKeyNavigation = debounce((e) => {
 
 document.addEventListener('keydown', handleKeyNavigation);
 
-function openModal(color, seats, description) {
+function openModal() {
   var modal = document.getElementById("carModal");
   var number = document.getElementById("number");
 
