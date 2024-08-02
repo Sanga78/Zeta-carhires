@@ -146,4 +146,4 @@ EMAIL_USE_TLS = True                   # Use TLS for secure connection
 EMAIL_HOST_USER='sangakelvin026@gmail.com'
 EMAIL_HOST_PASSWORD='gvtv knhf fdsk gguj'
 # EMAIL_USE_TLS=True
-DEFAULT_FROM_EMAIL="Student management System <sangakelvin026@gmail.com>"
+DEFAULT_FROM_EMAIL="Zeta CarHires <sangakelvin026@gmail.com>"

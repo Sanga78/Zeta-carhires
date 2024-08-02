@@ -1,16 +1,109 @@
 {% extends "base.html" %}
 {% block main_content %}
 {% load static %}
+<style>
+    * {
+    box-sizing: border-box;
+}
+.container-contact {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+.contact-form h1 {
+    text-align: center;
+    color: #007BFF; /* Changed to blue */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    border-radius: 5px;
+    color: #0056b3;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.radio-group label {
+    margin-right: 20px;
+} 
+.radio-group > div{
+    border: 1px solid #007BFF;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+.radio-group > div:hover{
+    background-color: rgba(0, 123, 255,0.3);
+}
+.form-group textarea {
+    height: 100px;
+}
+#flex{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+.form-field{
+    width: 100%;
+}
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF; /* Changed to blue */
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    .radio-group {
+        flex-direction: column;
+    }
+
+    .radio-group label {
+        margin-bottom: 10px;
+    }
+}
+
+</style>
 <main class="earn">
 <!-- End Header -->
-    <section class="home">
+    <section class="earn-hero">
         <div class="description">
             <h2>Become a car sharing entrepreneur</h2>
-        </div>
-    </section>
-    <section class="fixed delay-neg-500">
-        <div class="whatsap">
-            <a href="https://wa.me/+19197022312" class="bi bi-whatsapp" aria-hidden="true">&nbsp;&nbsp;Chat with Us</a>
         </div>
     </section>
     <section class="hero flex-column justify-content-center align-items-center">
@@ -31,41 +124,6 @@
             </div>
         </div>
        </div>
-    </section>
-    <section class="inquire">
-
-    </section>
-   
-    <section class="connect flex-column justify-content-center align-items-center">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="content">
-                    <div><h1>Zeta<span> peace of mind</span></h1></div>
-                    <div>be independent</div>
-                    <div>your car is your ca(r)pital</div>
-                    <div>link</div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <h3>Contact us anytime</h3>
-                <p>Have a question? We're here to help. Send us a message and we'll get be in touch.</p>
-                <form action="/response" method="post">
-                    {% csrf_token %}
-                    {% if user.is_authenticated %}
-                    <label for="full_name">Name<input type="text" id="full_name" name="full_name" value="{{ user.first_name }} {{ user.last_name }}"></label>
-                    <label for="email">Email<input type="email" id="email" name="email" value="{{ user.email }}"></label>
-                    {% else %}
-                    <label for="full_name">Name<input type="text" id="full_name" name="full_name"></label>
-                    <label for="email">Email<input type="email" id="email" name="email"></label>
-                    {% endif %}
-                    <label for="phone_number">Phone Number<input type="tel" id="phone_number" name="phone_number"></label>
-                    <label for="message">Message:
-                        <textarea id="bio" name="message" rows="3" cols="30" placeholder="How do you operate..."></textarea>
-                    </label>
-                    <button type="submit">send</button>
-                </form>
-            </div>
-        </div>
     </section>
     <section class="testimonial">
         <h2>Testimonials</h2>
@@ -88,12 +146,70 @@
                 <p>"The team at Zeta Car Hires is incredibly supportive. They are always available to assist with any concerns or questions. Sharing my car has never been easier or more rewarding." </p>
                 <h3>Emily Davis</h3>
             </div>
-            <div class="box">
-                <img src="{% static 'media/images/pic-1.png' %}" class="user" alt="User Image">
-                <div class="marks"><i class="bi bi-quote" aria-hidden="true"></i></div>
-                <p>"Thanks to Zeta Car Hires, I've managed to cover my car payments and maintenance costs effortlessly. It's a great way to make use of my car when I'm not using it." </p>
-                <h3>David Brown</h3>
-            </div>
+        </div>
+    </section>
+    <section class="connect">
+        <div class="container-contact">
+            <form class="contact-form" action="/response">
+                <h1>Contact Us</h1>
+                {% csrf_token %}
+                    {% if user.is_authenticated %}
+                    <div class="form-group" id="flex">
+                        <div class="form-field">
+                            <label for="first-name">First Name *</label>
+                            <input type="text" id="first-name" name="first-name" value="{{ user.first_name }}" required>
+                        </div>                
+                        <div class="form-field">
+                            <label for="last-name">Last Name *</label>
+                            <input type="text" id="last-name" name="last-name" value="{{ user.last_name }}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                    </div>
+                    {% else %}
+                    <div class="form-group" id="flex">
+                        <div class="form-field">
+                            <label for="first-name">First Name *</label>
+                            <input type="text" id="first-name" name="first-name" required>
+                        </div>                
+                        <div class="form-field">
+                            <label for="last-name">Last Name *</label>
+                            <input type="text" id="last-name" name="last-name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    {% endif %}
+                <div class="form-group">
+                    <label for="phone_number">Phone Number *</label>
+                    <input type="tel" id="phone_number" name="phone_number" required>
+                </div>
+                <div>
+                    <label>Query Type *</label>
+                    <div class="radio-group">
+                        <div><input type="radio" id="general-enquiry" name="query-type" value="general-enquiry" checked>
+                            <label for="general-enquiry">General Enquiry</label></div>
+                        <div>
+                            <input type="radio" id="support-request" name="query-type" value="support-request">
+                        <label for="support-request">Support Request</label>
+                        </div>
+       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div style="align-items: center; display: flex; padding: 10px 0;">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">I consent to being contacted by the team *</label>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </section>
 </main> 

@@ -59,7 +59,7 @@ class Booking(models.Model):
     customer_name = models.ForeignKey(Customer,on_delete= models.SET_NULL,null=True, blank=True)
     booking_date = models.DateTimeField(default=timezone.now)
     return_date = models.DateTimeField(null=True, blank=True)
-    total_cost = models.FloatField()
+    total_cost = models.FloatField(null=True, blank=True)
     def __str__(self):
         return f"{self.customer_name} - {self.car.car_name}"
 

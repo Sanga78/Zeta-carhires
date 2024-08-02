@@ -62,6 +62,7 @@ urlpatterns = [
     path('return/<int:booking_id>/', AdminViews.return_car, name='return_car'),    
     path('update_profile/<str:customer_id>',Customerviews.update_profile,name="update_profile"),
     path('profile_save',Customerviews.profile_save,name="profile_save"),
+    path('pay',Customerviews.pay,name="pay"),
     path('booked_cars/', Customerviews.booked_cars_list, name='booked_cars_list'),
     path('password-reset/', 
         auth_views.PasswordResetView.as_view(

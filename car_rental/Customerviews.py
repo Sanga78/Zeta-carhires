@@ -10,35 +10,6 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-
-# def rent_vehicle(request):
-#     id = request.POST['id']
-#     vehicle = Vehicle.objects.get(id = id)
-#     cost_per_day = int(vehicle.capacity)*13
-#     return render(request, 'customer/confirmation.html', {'vehicle':vehicle, 'cost_per_day':cost_per_day})
-     
-# def confirm(request):
-#     vehicle_id = request.POST['id']
-#     username = request.user
-#     user = CustomUser.objects.get(username = username)
-#     days = request.POST['days']
-#     vehicle = Vehicle.objects.get(id = vehicle_id)
-#     if vehicle.is_available:
-#         car_dealer = vehicle.dealer
-#         rent = (int(vehicle.capacity))*13*(int(days))
-#         car_dealer.wallet += rent
-#         car_dealer.save()
-#         try:
-#             order = Order(vehicle = vehicle, car_dealer = car_dealer, user = user, rent=rent, days=days)
-#             order.save()
-#         except:
-#             order = Order.objects.get(vehicle = vehicle, car_dealer = car_dealer, user = user, rent=rent, days=days)
-#         vehicle.is_available = False
-#         vehicle.save()
-#         return render(request, 'customer/confirmed.html', {'order':order})
-#     else:
-#         return render(request, 'customer/order_failed.html')
-
 def customer_home(request):
     return render(request,'index.html')
 
@@ -67,6 +38,9 @@ def book_car(request, car_id):
         return render(request, 'book_car.html', {'car': car})
     else:
         return HttpResponse(f"Car is not available. Please call +123456789 for more information.")
+
+def pay(request):
+    return render(request,'pay.html')
 
 def update_profile(request, customer_id):
     request.session['customer_id'] = customer_id

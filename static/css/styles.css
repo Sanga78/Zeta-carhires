@@ -29,12 +29,19 @@ html {
     scroll-padding-top: 9rem;
     scroll-behavior: smooth;
 }
+body, h1, h2, h3, p, ul, li, a, input, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
 body {
   font-family: var(--font-default);
   color: var(--black);
   background-color: var(--bg);
 }
-
+main {
+  padding: 2em 0;
+}
 a {
   color: var(--color-primary);
   text-decoration: none;
@@ -828,27 +835,39 @@ padding: 1rem;
   color: var(--main-color);
   font-size: 2rem;
 }
+.earn{
+  background: fixed;
+  /* background:linear-gradient( rgba(210, 215, 219, 0.5) 100%, rgba(234, 229, 229, 0.5)100%),url("../images/bg_3.jpg"); */
+  background-size: cover;
+  background-position: center;
+  scroll-behavior: smooth;
+  padding: 15px 3%;
+  margin-top: 4%;
+}
 .earn .home{
   color: var(--white);
   background-color: var(--main-color);
 }
-.earn .home .description{
-  width: 60vw;
+.earn-hero {
+  background-color: rgb(0, 123, 255,0.8);
+  padding: 2em 0;
+  text-align: center;
 }
-.earn .home h2{
+.earn-hero h2{
+  text-align: center;
   text-transform: unset;
   color: var(--white);
   line-height: 0.85;
   font-weight: bold;
-  font-size: 4rem;
+  font-size: 2.4rem;
 }
-.earn .hero{
+/* .earn .hero{
   min-height: 75vh;
-}
+} */
 .earn .hero h2{
   color: var(--black);
   text-transform: none;
-  font-size: 3.4rem;
+  font-size: 2.4rem;
   padding-bottom: 4rem;
 }
 .earn .hero h1{
@@ -862,49 +881,10 @@ padding: 1rem;
   line-height: 1.8;
 }
 .earn .connect{
-  background-color: var(--main-color);
-  min-height: 75vh;
-  color: var(--white);
-}
-.earn .connect .row{
-  padding: 10px 7%;
+  background-color: #efeded;
+  padding: 2rem;
 }
 
-.earn .connect h3{
-  margin-top: 2rem;
-  color: var(--white);
-  font-weight: 600;
-}
-.earn .connect p{
-  font-family: var(--font-default);
-  font-weight: 100;
-  line-height: 1.5;
-  padding: .8rem 0;
-}
-.earn .connect form label{
-  font-family: var(--font-primary);
-  display: block;
-  margin: 0.5rem 0;
-}
-.earn .connect form input{
-  margin: 10px 0 0 0;
-  width: 100%;
-  min-height: 2em;
-  padding-left: .3rem;
-  background-color: transparent;
-  border-bottom: .1px solid var(--white);
-  color: var(--white);
-}
-
-.earn .connect form button{
-  display: block;
-  width: 100%;
-  margin: 1em auto;
-  height: 2em;
-  font-size: 1.1rem;
-  border-color: white;
-  min-width: 20vw;
-} 
 .index .offer{
   padding: 10px 7%;
   display: grid;
@@ -933,8 +913,6 @@ padding: 1rem;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  margin-top: 5%;
-  min-height: 75vh;
 }
 .index .home h2{
   color: yellow;
@@ -969,7 +947,7 @@ padding: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1.5rem;
   height: 90vh;
-  padding-top: 3%;
+  margin: auto;
 }
 .delay-neg-500 {
   animation-name: move;
@@ -990,20 +968,22 @@ padding: 1rem;
   color: azure;
 }
 
-.grow .quote{
+/* .grow .quote{
   min-height: 50vh;
-  background-color: var(--main-color);
+  background-color: rgba(8, 94, 180,0.8);
   background-size:cover;
   color: var(--white);
-}
+} */
 .grow .quote div{
   padding: 10px 3%;
 }
-.grow .quote p{
-  font-family: var(--font-default);
-  font-style: italic;
-  line-height: 1.5;
-  font-size: 2rem;
+
+.grow .quote .content{
+  width: 300px;
+  height: 300px;
+  border: 1px solid #1d1c1c;
+  /* border-radius: 0 0 200px 200px; */
+  align-items: center;
 }
 .grow .quote .details{
   margin-top: 2rem;
@@ -1014,7 +994,7 @@ padding: 1rem;
   align-items: center;
 
 }
-.grow .quote .details img{
+.grow .img img{
   height: 100px;
   width: 100px;
   border-radius: 50%;
@@ -1221,7 +1201,7 @@ animation: revealNextWord 6s cubic-bezier(0.57, 1.52, 0.9, 1.08) 4.5s infinite;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   overflow: hidden;
 }
 
@@ -1231,7 +1211,7 @@ animation: revealNextWord 6s cubic-bezier(0.57, 1.52, 0.9, 1.08) 4.5s infinite;
   list-style-type: none;
   display: flex;
   transition: transform 1.25s;
-  gap: 1.2rem;
+  /* gap: 1.2rem; */
 }
 
 .item {
@@ -1522,13 +1502,13 @@ footer ul li a:hover{
   .fixed{
     margin-left: 50vw;
   }
-  .grow .home{
+  /* .grow .home{
     margin-top: 20%;
     color: var(--main-color);
-  }
-  .grow .home h2{
+  } */
+  /* .grow .home h2{
     color: var(--main-color);
-  }
+  } */
   .grow .quote p{
     font-size: 97.5%;
   }
@@ -1539,9 +1519,6 @@ footer ul li a:hover{
   }
   .hire .home{
     max-height: 80vh;
-  }
-  .earn .home{
-    max-height: 86vh;
   }
   .number{
     height: 50px;
@@ -1621,3 +1598,7 @@ footer ul li a:hover{
   /* .dropdown:hover .dropdown-content {
   display: block;
   } */
+  
+  body{
+    padding-top: 30px; /* To prevent content from hiding under fixed navbar */
+  }
