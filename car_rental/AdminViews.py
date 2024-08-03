@@ -239,7 +239,8 @@ def new_fleet(request):
 
 def bookings(request):
     cars = Car.objects.all()
-    return render(request,"Admin_templates/bookings.html",{"cars":cars})
+    bookings = Booking.objects.all()
+    return render(request,"Admin_templates/bookings.html",{"cars":cars,"bookings":bookings})
 
 def add_car(request):
     if request.method == 'POST':
