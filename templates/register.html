@@ -1,147 +1,43 @@
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zeta CarHires| Sign Up</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="{{ 'index' }}"><b>Zeta</b>CarHires</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to Zeta CarHires</p>
-
-      <form action="" method="post" autocomplete="off">
-        {% csrf_token %}
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" name="first_name" placeholder="Enter your First Name" required>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" name="last_name" placeholder="Enter your Last Name" required>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">@</span>
-            </div>
-            <input type="text" class="form-control" name="username" placeholder="Username" required>
-          </div>
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email" placeholder="Email" required>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title=" Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-            <input type="password" class="form-control" name="password2" placeholder="Confirm Password" required>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
-          </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
-              <label for="agreeTerms">
-               I agree to <a href="{{ 'policy' }}">terms and conditions</a>
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-          </div>
-          <!-- /.col -->
-        </div>
-        <div class="row">
-          {% if messages %}
-          <div class="col-12">
-            {% for message in messages %}
-            {% if message.tags == 'error' %}
-            <span class="alert alert-danger" style="margin-top: 10px;">{{ message }}</span>
-            {% endif %}
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
-
-      </form>
-      <p class="mb-0">
-        Already have an account? <a href="{{ 'loginpage' }}" class="text-center">Log In</a>
-      </p>
-    </div>
-    <!-- /.login-card-body -->
-  </div>
-</div>
-<!-- /.login-box -->
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="login.css">
+    <title>Zeta CarHires | SignUp</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
     <div class="modal" id="about_modal">    
         <div class="modal__half modal__about">
             <h3 class="modal__title modal__title--about">
-                Welcome to <b class="blue"> Zeta carhires</b>
+                Welcome to <a class="blue" href="{{ 'index' }}"> Zeta carhires🚗✨</a>
             </h3>
-            <h4 class="modal__sub-title">
-                Already have an account? <a class="blue" href="login.html">Sign In</a>
-            </h4>
             <p class="modal__para">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam totam voluptatibus perferendis corrupti provident placeat, esse fugit? Debitis exercitationem rem sed ratione id, doloribus blanditiis a iste nulla, neque cum.
-            </p>           
+              We're thrilled to have you here. Your adventure begins now! 🌟 Sign up to explore our extensive car listings and enjoy a seamless booking experience. Let's make your journeys unforgettable!🌍🚘
+            </p>
+            <h4 class="modal__sub-title">
+              Already have an account? <a class="blue" href="{{ 'loginpage' }}">Sign In</a>
+          </h4>           
         </div>
         <div class="modal__half modal__contact"> 
             <div class="login-container">
                 <form class="login-form" method="post">
+                  {% csrf_token %}
                     <h1>Sign Up</h1>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="email" required>
+                    <div class="form-group" id="flex">
+                        <div class="form-field">
+                            <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+                        </div>                
+                        <div class="form-field">
+                            <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="username" name="username" placeholder="username" required>
+                        <input type="email" id="email" name="email" placeholder="email" required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="username" name="username" placeholder="username" required autocomplete="off">
                     </div>
                     <div class="form-group">
                         <input type="password" id="password" name="password" placeholder="Pasword" required>
@@ -152,20 +48,95 @@
                     <div>
                         <div id="form-group">
                             <div id="form-check">
-                                <input type="checkbox" id="remember-me" name="remember-me">
-                                <label style="color: white;" for="remember-me">I agree to the terms and policies</label>
+                                <input type="checkbox" id="remember-me" name="remember-me" required>
+                                <label style="color: white;" for="remember-me">I agree to the <a href="{{ 'policy' }}"> terms and conditions</a></label>
                             </div>
                         </div>    
                 </div>
                     <button type="submit">Register</button>
                     <div class="form-links">
-                        <a href="login.html">Already have an account? Login</a>
+                        <a href="{{ 'loginpage' }}">Already have an account? Login</a>
                     </div>
+                    <div class="form-group">
+                        {% if messages %}
+                        <div>
+                        {% for message in messages %}
+                         {% if message.tags == 'error' %}                            
+                         <div class="message">
+                           <span>{{ message }}</span>
+                         </div>
+                         {% endif %}
+                         {% endfor %}
+                       </div>
+                       {% endif %}
+                   </div>
                 </form>
             </div>
         </div>
-
     </div>
 </body>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#email").keyup(function () {
+      var email = $(this).val();
+      if(email!=""){
+          $.ajax({
+            url:"{% url 'check_email_exist' %}",
+            type:'POST',
+            data:{email:email}
+          })
+          .done(function(response){
+            if(response=="True"){
+              $(".email_error").remove();
+              $("<span class='email_error' style='padding: 5px 0;color:#ed3030;font-weight: bold;'>Email Already Exists</span>").insertAfter("#email");
+            }
+            else{
+              $(".email_error").remove();
+              $("<span class='email_error' style='padding: 5px 0;color:green;font-weight: bold;'>Email Available</span>").insertAfter("#email");
+            }
+          })
+          .fail(function(){
+            console.log("Failed");
+          })
+      }
+      else{
+        $(".email_error").remove();
+      }
+    });
+    $("#username").keyup(function () {
+      var username = $(this).val();
+
+      if(username!=""){
+          $.ajax({
+          url:"{% url 'check_username_exist' %}",
+          type:'POST',
+          data:{username:username}
+          })
+          .done(function(response){
+            console.log(response);
+            if(response=="True"){
+              $(".username_error").remove();
+              $("<span class='username_error' style='padding: 5px 0;color:#ed3030;font-weight: bold;'>Username Not Available</span>").insertAfter("#username");
+            }
+            else{
+              $(".username_error").remove();
+              $("<span class='username_error' style='padding: 5px 0;color:green;font-weight: bold;'>Username Available</span>").insertAfter("#username");
+            }
+          })
+          .fail(function(){
+            console.log("Failed");
+          })
+      }
+      else{
+        $(".username_error").remove();
+      }
+      
+    });
+  });
+</script>
 </html>
 
