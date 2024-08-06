@@ -2,111 +2,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zeta CarHires| Log in</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- fontawesome cdn link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" crossorigin="anonymous" />
-  <!-- iCheck -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="{{ 'index' }}"><b>Zeta</b>CarHires</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to Zeta CarHires</p>
-
-      <form action="/login" method="post" autocomplete="off">
-        {% csrf_token %}
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email" placeholder="Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title=" Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <!-- /.col -->
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-        <div class="row">
-          {% if messages %}
-          <div class="col-12">
-            {% for message in messages %}
-            {% if message.tags == 'error' %}
-            <span class="alert alert-danger" style="margin-top: 10px;">{{ message }}</span>
-            {% endif %}
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
-
-      </form>
-      <p class="mb-1">
-        <a href="{{ 'password-reset/' }}">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        Don't have an account? <a href="{{ 'register' }}" class="text-center">Sign Up</a>
-      </p>
-    </div>
-    <p class="col-8">
-      <a class="btn btn-danger" href="{{ 'index' }}">Cancel</a>
-    </p>
-    <!-- /.login-card-body -->
-  </div>
-</div>
-<!-- /.login-box -->
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="login.css">
+    <title>Zeta CarHires Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
     <div class="modal" id="about_modal">    
         <div class="modal__half modal__about">
             <h3 class="modal__title modal__title--about">
-                Welcome back to <b class="blue"> Zeta carhires</b>
+                Welcome back to <a class="blue" href="{{ 'index' }}"> Zeta carhires</a>
             </h3>
-            <h4 class="modal__sub-title">
-                Don't have an account? <a class="blue" href="">Register with us</a>
-            </h4>
             <p class="modal__para">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam totam voluptatibus perferendis corrupti provident placeat, esse fugit? Debitis exercitationem rem sed ratione id, doloribus blanditiis a iste nulla, neque cum.
-            </p>           
+              We're excited to see you again.Your next adventure awaits🌟 Log in to explore our latest car listings and enjoy a seamless booking experiencee.Let's make your journey unforgettable🌍🚘
+            </p>  
+            <h4 class="modal__sub-title">
+                Don't have an account? <a class="blue" href="{{ 'register' }}">Register with us</a>
+            </h4>         
         </div>
         <div class="modal__half modal__contact"> 
             <div class="login-container">
-                <form class="login-form">
+                <form class="login-form" action="/login" method="post">
+                  {% csrf_token %}
                     <h1>Login</h1>
                     <div class="form-group">
-                        <input type="text" id="username" name="username" placeholder="username" required>
+                        <input type="email" id="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
                         <input type="password" id="password" name="password" placeholder="password" required>
@@ -125,6 +45,19 @@
                     <div class="form-links">
                         <a href="{{ 'register' }}">Don't have an account? Register</a>
                     </div>
+                    <div class="form-group">
+                         {% if messages %}
+                         <div>
+                          {% for message in messages %}
+                          {% if message.tags == 'error' %} 
+                          <div class="message">
+                            <span>{{ message }}</span>
+                          </div>
+                          {% endif %}
+                          {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
                 </form>
             </div>
         </div>
@@ -132,4 +65,5 @@
     </div>
 </body>
 </html>
+
 
