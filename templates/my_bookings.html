@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 {% block main_content %}
 {% load static %}
-<br>
-<br>
-<br>
-<br>
+
 <head>
     <style>
         .booking-history-container {
@@ -50,7 +47,7 @@ th {
 
     </style>
 </head>
-
+<main>
 <div class="booking-history-container">
     <h1>Booking History</h1>
     {% if bookings %}
@@ -85,3 +82,4 @@ th {
     {% endif %}
 </div>
 {% endblock main_content %}
+</main>
