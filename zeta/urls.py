@@ -43,6 +43,8 @@ urlpatterns = [
     path('manage_customer',AdminViews.manage_customer,name="manage_customer"),
     path('add_car', AdminViews.add_car, name='add_car'),
     path('register',views.register,name="register"),
+    path('check_email_exist',views.check_email_exist,name="check_email_exist"),
+    path('check_username_exist',views.check_username_exist,name="check_username_exist"),
     path('loginpage',views.loginPage,name="show_login"),
     path('login',views.Login,name="do_login"),
     path('get_user_details',views.GetUserDetails),
