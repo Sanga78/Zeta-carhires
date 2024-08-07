@@ -45,14 +45,16 @@ def pay(request):
 def update_profile(request, customer_id):
     request.session['customer_id'] = customer_id
     customer = get_object_or_404(Customer, admin=customer_id)
-    form = UpdateProfileForm(initial={
+    context={
+        "id": customer_id,
         'email': customer.admin.email,
         'first_name': customer.admin.first_name,
         'last_name': customer.admin.last_name,
         'username': customer.admin.username,
-        'address': customer.address
-    })
-    return render(request, "profile.html", {"form": form, "id": customer_id, "username": customer.admin.username})
+        'address': customer.address,
+        'profile_pic': customer.profile_pic
+    }
+    return render(request, "profile.html", context)
 
 def profile_save(request):
     if request.method != "POST":
