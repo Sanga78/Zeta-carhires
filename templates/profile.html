@@ -1,97 +1,71 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
+{% load static %}
 {% block main_content %}
-<head>
-  <style>
-    form{
-      margin: 2rem auto;
-      max-width: 450px;
-    }
-    .form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-.card {
-    margin-top: 50px;
-}
-
-.card-footer {
-    background-color: #f8f9fa;
-}
-
-.alert {
-    margin-top: 10px;
-}
-
-  </style>
-</head>
-<br>
 <main>
-<h3>Hey {{user.username}}</h3>
-<p>Update your profile below</p>
-      <!-- form start -->
-<form action="/profile_save" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="card-body">
-       {% for field in form %} 
-      <div class="form-group">
-        {{ field.errors }}
-        {{ field.label_tag }}
-        {{ field }}
-        </div>
-      {% endfor %}
-      <div class="form-group">
-        {% if messages %}
-          {% for message in messages %}
-          {% if message.tags == 'error' %}
-          <div class="alert alert-danger" style="margin-top: 10px;">{{ message }}</div>
-          {% endif %}
-          {% if message.tags == 'success' %}
-          <div class="alert alert-success" style="margin-top: 10px;">{{ message }}</div>
-          {% endif %}
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-    <!-- /.card-body -->
-
-    <div class="card-footer">
-      <button type="submit" class="btn btn-primary btn-block">Update Profile</button>
-    </div>
-  </form>
-
-        
-    </div>
-{% endblock main_content %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+  <div class="profile_modal" id="profile_modal">
+    <div class="modal__half">
+        <h3 class="modal__title modal__title--about">
+            Hey <b class="blue"> {{user.username}}</b>
+        </h3>
+        <h4 class="modal__sub-title">
+            Make your profile look awesome and nicer by updating it
+        </h4>
+          <div class="image">
+            <img src="{{profile_pic}}" alt="{{username}}">
+          </div>       
+    </div> 
+        <div class="login-container">
+            <form class="login-form" action="/profile_save" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                <h1>Update your Profile</h1>
+                <div class="form-group" id="flex">
+                    <div class="form-field">
+                        <input type="text" id="first_name" name="first_name" placeholder="First Name" value="{{first_name}}">
+                    </div>                
+                    <div class="form-field">
+                        <input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{last_name}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="email"value="{{email}}" disabled="disabled" style="color: black;">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="username" name="username" placeholder="username" value="{{username}}" disabled="disabled" style="color: black;">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="address" name="address" placeholder="Address" value="{{address}}">
+                </div>
+                <div class="form-group">
+                    <label for="profile_pic">Profile Picture</label>
+                    <input type="file" id="profile_pic" name="profile_pic">
+                </div>
+                <div>  
+            </div>
+                <button type="submit">Update Profile</button> 
+                <div class="form-group">
+                  {% if messages %}
+                  <div>
+                  {% for message in messages %}
+                   {% if message.tags == 'error' %}                            
+                   <div class="message">
+                     <span>{{ message }}</span>
+                   </div>
+                   {% endif %}
+                   {% if message.tags == 'success' %}
+                   <div class="success_message">
+                    <span>{{ message }}</span>
+                  </div>
+                    {% endif %}
+                   {% endfor %}
+                 </div>
+                 {% endif %}
+             </div>                
+            </form>
+        </div> 
+    
+</div>
 </main>
+{% endblock main_content%}
