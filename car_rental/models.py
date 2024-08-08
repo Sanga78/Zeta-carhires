@@ -11,6 +11,7 @@ class CustomUser(AbstractUser):
 
 class CarDealer(models.Model):
     id = models.AutoField(primary_key=True)
+    profile_pic = models.FileField(default='static/images/person_1.jpg')
     admin = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
