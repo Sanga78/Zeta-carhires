@@ -83,4 +83,6 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), 
          name='password_reset_complete'),
     path('car_list', AdminViews.car_list, name='car_list'),
+    path('admin_profile',AdminViews.admin_profile,name="admin_profile"),
+    path('admin_profile_save',AdminViews.admin_profile_save,name="admin_profile_save"),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
