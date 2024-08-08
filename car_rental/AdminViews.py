@@ -257,3 +257,37 @@ def add_car(request):
 def car_list(request):
     cars = Car.objects.all()
     return render(request, 'Admin_templates/car_list.html', {'cars': cars})
+
+def admin_profile(request):
+    user = CustomUser.objects.get(id=request.user.id)
+    return render(request,"Admin_templates/admin_profile.html",{"user":user})
+
+def admin_profile_save(request):
+    if request.method != "POST":
+        return HttpResponseRedirect(reverse("admin_profile"))
+    else:
+        first_name=request.POST.get("first_name")
+        last_name=request.POST.get("last_name")
+        password=request.POST.get("password")
+        profile_pic_url = None
+        if 'profile_pic' in request.FILES:
+            profile_pic = request.FILES['profile_pic']
+            fs = FileSystemStorage()
+            filename = fs.save(profile_pic.name, profile_pic)
+            profile_pic_url = fs.url(filename)
+        try:
+            customuser=CustomUser.objects.get(id=request.user.id)
+            customuser.first_name=first_name
+            customuser.last_name=last_name
+            if password!=None and password!="":
+                customuser.set_password(password)
+            customuser.save()
+            admin = CarDealer.objects.get(admin=customuser)
+            if profile_pic_url:
+                admin.profile_pic = profile_pic_url
+            admin.save()
+            messages.success(request,"Successfully Updated Profile")
+            return HttpResponseRedirect(reverse("admin_profile"))
+        except:
+            messages.error(request,"Failed to Update Profile")
+            return HttpResponseRedirect(reverse("admin_profile"))
