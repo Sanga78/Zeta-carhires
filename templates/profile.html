@@ -14,7 +14,7 @@
             Make your profile look awesome and nicer by updating it
         </h4>
           <div class="image">
-            <img src="{{profile_pic}}" alt="{{username}}">
+            <img src="{{customer.profile_pic}}" alt="{{username}}">
           </div>       
     </div> 
         <div class="login-container">
@@ -23,20 +23,20 @@
                 <h1>Update your Profile</h1>
                 <div class="form-group" id="flex">
                     <div class="form-field">
-                        <input type="text" id="first_name" name="first_name" placeholder="First Name" value="{{first_name}}">
+                        <input type="text" id="first_name" name="first_name" placeholder="First Name" value="{{user.first_name}}">
                     </div>                
                     <div class="form-field">
-                        <input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{last_name}}">
+                        <input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{user.last_name}}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="email"value="{{email}}" disabled="disabled" style="color: black;">
+                    <input type="email" id="email" name="email" placeholder="email"value="{{user.email}}" disabled="disabled" style="color: black;">
                 </div>
                 <div class="form-group">
-                    <input type="text" id="username" name="username" placeholder="username" value="{{username}}" disabled="disabled" style="color: black;">
+                    <input type="text" id="username" name="username" placeholder="username" value="{{user.username}}" disabled="disabled" style="color: black;">
                 </div>
                 <div class="form-group">
-                    <input type="text" id="address" name="address" placeholder="Address" value="{{address}}">
+                    <input type="text" id="address" name="address" placeholder="Address" value="{{customer.address}}">
                 </div>
                 <div class="form-group">
                     <label for="profile_pic">Profile Picture</label>

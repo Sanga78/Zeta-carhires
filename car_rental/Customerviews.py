@@ -42,36 +42,18 @@ def book_car(request, car_id):
 def pay(request):
     return render(request,'pay.html')
 
-def update_profile(request, customer_id):
-    request.session['customer_id'] = customer_id
-    customer = get_object_or_404(Customer, admin=customer_id)
-    context={
-        "id": customer_id,
-        'email': customer.admin.email,
-        'first_name': customer.admin.first_name,
-        'last_name': customer.admin.last_name,
-        'username': customer.admin.username,
-        'address': customer.address,
-        'profile_pic': customer.profile_pic
-    }
-    return render(request, "profile.html", context)
+def update_profile(request):
+    user = CustomUser.objects.get(id=request.user.id)
+    customer = Customer.objects.get(admin=user)
+    return render(request, "profile.html",{"user":user,"customer":customer})
 
 def profile_save(request):
     if request.method != "POST":
         return HttpResponse("<h2>Method Not Allowed</h2>")
-
-    customer_id = request.session.get("customer_id")
-    if not customer_id:
-        return HttpResponseRedirect(reverse("update_profile", kwargs={"customer_id": customer_id}))
-
-    form = UpdateProfileForm(request.POST, request.FILES)
-    if form.is_valid():
-        first_name = form.cleaned_data["first_name"]
-        last_name = form.cleaned_data["last_name"]
-        username = form.cleaned_data["username"]
-        email = form.cleaned_data["email"]
-        address = form.cleaned_data["address"]
-
+    else:
+        first_name=request.POST.get("first_name")
+        last_name=request.POST.get("last_name")
+        address=request.POST.get("address")
         profile_pic_url = None
         if 'profile_pic' in request.FILES:
             profile_pic = request.FILES['profile_pic']
@@ -80,14 +62,12 @@ def profile_save(request):
             profile_pic_url = fs.url(filename)
 
         try:
-            user = CustomUser.objects.get(id=customer_id)
+            user = CustomUser.objects.get(id=request.user.id)
             user.first_name = first_name
             user.last_name = last_name
-            user.username = username
-            user.email = email
             user.save()
 
-            customer = Customer.objects.get(admin=customer_id)
+            customer = Customer.objects.get(admin=user)
             customer.address = address
             if profile_pic_url:
                 customer.profile_pic = profile_pic_url
@@ -95,23 +75,23 @@ def profile_save(request):
 
             # Send profile update notification email
             subject = 'Profile Updated'
-            html_message = render_to_string('emails/profile_update_notification.html', {'customer_name': customer.admin.username})
+            html_message = render_to_string('emails/profile_update_notification.html', {'customer_name': user.username})
             plain_message = strip_tags(html_message)
             from_email = 'your-email@gmail.com'
             to = customer.admin.email
 
             send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
-            del request.session['customer_id']
+            del request.user.id
             messages.success(request, "Successfully Updated Profile")
-            return HttpResponseRedirect(reverse("index"))  # Redirect to the index page after successful update
+            return HttpResponseRedirect(reverse("update_profile"))  # Redirect to the index page after successful update
         except CustomUser.DoesNotExist:
             messages.error(request, "Failed to Update Profile: User not found")
+            return HttpResponseRedirect(reverse("index"))
         except Exception as e:
             messages.error(request, f"Failed to Update Profile: {str(e)}")
+            return HttpResponseRedirect(reverse("index"))
 
-    customer = get_object_or_404(Customer, admin=customer_id)
-    return render(request, "profile.html", {"form": form, "id": customer_id, "username": customer.admin.username})
 def booked_cars_list(request):
     user = request.user
     if user.is_authenticated:

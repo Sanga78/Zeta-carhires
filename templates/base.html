@@ -38,7 +38,7 @@
                     </button>
                     <div class="dropdown-content" id="dropdown-content">
                         {% if user.is_authenticated %}
-                            <a href="{% url 'update_profile' user.id %}">My Profile</a>
+                            <a href="{% url 'update_profile' %}">My Profile</a>
                             <a href="{% url 'booked_cars_list' %}">Bookings</a>
                             <a href="{{ 'logout' }}" style="color:red">Logout</a>
                         {% else %}
@@ -54,23 +54,23 @@
     </header>
 
     <!-- Main Content -->
-        {% if messages %}
+        <!-- {% if messages %}
             {% for message in messages %}
                 {% if message.tags == 'error' %}
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger" style="color: red;">
                         <script>
                             alert("{{ message }}");
                         </script>
                     </div>
                 {% elif message.tags == 'success' %}
-                    <div class="alert alert-success">
+                    <div class="alert alert-success" style="color: green;">
                         <script>
                             alert("{{ message }}");
                         </script>
                     </div>
                 {% endif %}
             {% endfor %}
-        {% endif %}
+        {% endif %} -->
         {% block main_content %}{% endblock main_content %}
 
     <!-- Footer Section -->
